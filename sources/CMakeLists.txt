@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.12.1)
+cmake_minimum_required (VERSION 3.13.3)
 
 set (CMAKE_CONFIGURATION_TYPES "Debug;Optimized;Shipping" CACHE STRING "TEST" FORCE)
 
@@ -15,13 +15,16 @@ set (
 	CMAKE_CXX_FLAGS
 	"-Weverything -Werror -Wno-c++98-compat -Wno-c++98-compat-pedantic \
 	-Wno-float-equal -Wno-global-constructors -Wno-comma -Wno-c++98-compat-pedantic \
-	-std=c++17 -fms-extensions -mavx")
+	-Wno-weak-vtables \
+	-std=c++17 -fms-extensions -fno-exceptions -mavx")
 
 set_property (GLOBAL PROPERTY CXX_STANDARD 17)
 
 if (NOT CMAKE_SIZEOF_VOID_P EQUAL 8)
 	message (FATAL_ERROR "Only 64-bit build is supported")
 endif ()
+
+add_compile_definitions (AR_CLANG)
 
 if (UNIX)
 	add_compile_definitions (AR_UNIX)
@@ -30,6 +33,8 @@ elseif (WIN32)
 else ()
 	message (FATAL_ERROR "Unsupported platform")
 endif ()
+
+set (BUILD_SHARED_LIBS ON)
 
 set (ARGON_SOURCE_DIR ${PROJECT_SOURCE_DIR})
 set (CMAKE_BINARY_DIR ${ARGON_SOURCE_DIR}/../binaries)
@@ -52,7 +57,6 @@ while (_iterator LESS _projectLength)
 	list (GET ARGON_PROJECTS ${_iterator} projPath)
 	math (EXPR _iterator "${_iterator} + 1")
 	add_subdirectory (${projPath})
-	include_directories (${projPath})
 	message (STATUS ${projPath})
 endwhile ()
 

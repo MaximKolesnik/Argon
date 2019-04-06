@@ -1,18 +1,16 @@
-cmake_minimum_required (VERSION 3.12.1)
+cmake_minimum_required (VERSION 3.13.3)
 
 project (engine_core)
 
+add_executable (engine_core "")
 
-
-#message (${SOURCES})
-
-add_executable (engine_core main.cpp)
-
-#message (${SOURCES})
+target_sources (${PROJECT_NAME} PRIVATE main.cpp)
 
 target_link_libraries (
 	engine_core
 	PRIVATE
-	core_types
+	#core_types
 	fundamental
-	math)
+	math
+	render
+)

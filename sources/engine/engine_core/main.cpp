@@ -1,11 +1,10 @@
-#include <iostream>
+#include <render/simple_app.hpp>
 
-#include <core_types/i_entity.hpp>
-
-#include <fundamental/types.hpp>
+#include <fundamental/debug.hpp>
 
 int main()
 {
-	//std::uint16_t testVar;
-	std::cout << "test\n";
+	Argon::SimpleApp simpleApp;
+
+	simpleApp.run();
 }
