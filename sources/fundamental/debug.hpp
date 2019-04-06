@@ -12,24 +12,22 @@ namespace Argon
 {
 namespace Debug
 {
-template <typename FirstArg, typename ...Args>
-void ErrorMsg(const FirstArg &arg, Args &&...args)
+template <typename ...Args>
+void ErrorMsg(Args &&...args)
 {
-	std::cerr << arg;
-	if constexpr (sizeof...(Args) == 0)
-		std::cerr << std::endl;
-	else
-		ErrorMsg(std::forward<Args>(args)...);
+	static_assert(sizeof...(args), "ErrorMsg should be called with at least one argument");
+
+	std::cerr << "ERROR MSG: ";
+	(std::cerr << ... << args) << std::endl;
 }
 
-template <typename FirstArg, typename ...Args>
-void InfoMsg(const FirstArg &arg, Args &&...args)
+template <typename ...Args>
+void StatusMsg(Args &&...args)
 {
-	std::cout << arg;
-	if constexpr (sizeof...(Args) == 0)
-		std::cout << std::endl;
-	else
-		InfoMsg(std::forward<Args>(args)...);
+	static_assert(sizeof...(args), "StatusMsg should be called with at least one argument");
+
+	std::cerr << "STATUS MSG: ";
+	(std::cerr << ... << args) << std::endl;
 }
 } // namespace Debug
 } // namespace Argon
