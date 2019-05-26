@@ -1,4 +1,5 @@
 #!/bin/bash
+mkdir -p solutions
 cmake ../sources/CMakeLists.txt -B"solutions" -G"Unix Makefiles" -DARGON_TARGET=engine
 make -C"solutions"
 
