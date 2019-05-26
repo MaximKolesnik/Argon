@@ -1,10 +1,15 @@
 #pragma once
 
+#include <fundamental/compiler_macros.hpp>
+
 namespace Argon
 {
-class SimpleApp
+class AR_SYM_EXPORT SimpleApp
 {
 public:
-	void run();
+	void prepare();
+	bool shouldClose();
+	void tick();
+	void close();
 };
 }
