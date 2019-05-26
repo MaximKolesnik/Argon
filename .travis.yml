@@ -10,4 +10,4 @@ branches:
   only:
   - master
   - "/^v\\d+\\./"
-script: ./build/linux_build.sh
+script: ./build/linux_build
