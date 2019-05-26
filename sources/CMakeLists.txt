@@ -15,8 +15,8 @@ set (
 	CMAKE_CXX_FLAGS
 	"-Weverything -Werror -Wno-c++98-compat -Wno-c++98-compat-pedantic \
 	-Wno-float-equal -Wno-global-constructors -Wno-comma -Wno-c++98-compat-pedantic \
-	-Wno-weak-vtables \
-	-std=c++17 -fms-extensions -fno-exceptions -mavx")
+	-Wno-weak-vtables -Wno-exit-time-destructors \
+	-std=c++17 -fms-extensions -fno-exceptions -fvisibility=hidden -mavx")
 
 set_property (GLOBAL PROPERTY CXX_STANDARD 17)
 

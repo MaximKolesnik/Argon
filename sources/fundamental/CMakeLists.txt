@@ -7,6 +7,7 @@ add_library (
 	compiler_macros.hpp
 	debug.hpp
 	helper_macros.hpp
+	non_copyable.hpp
 	types.hpp
 	)
 

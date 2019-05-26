@@ -15,3 +15,5 @@
 #endif // ifdef AR_CLANG
 
 #define AR_FORCE_INLINE inline
+
+#define AR_SYM_EXPORT __attribute__((visibility("default")))
