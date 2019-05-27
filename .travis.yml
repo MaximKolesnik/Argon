@@ -2,15 +2,15 @@ language: cpp
 sudo: required
 dist: trusty
 compiler:
-- clang
+ - clang
 os:
-- linux
+ - linux
 ruby: 2.2.0
 before_install:
-	- sudo apt-get update
-	- sudo apt-get install -y cmake
+ - sudo apt-get update
+ - sudo apt-get install -y cmake
 branches:
-  only:
-  - master
-  - "/^v\\d+\\./"
+ only:
+ - master
+ - "/^v\\d+\\./"
 script: ./build/linux_build
