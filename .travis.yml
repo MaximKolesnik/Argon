@@ -27,12 +27,13 @@ matrix:
       - version=3.13
       - build=3
       - mkdir ~/temp
-      - cd ~/temp
+      - pushd ~/temp
       - wget https://cmake.org/files/v$version/cmake-$version.$build-Linux-x86_64.tar.gz
       - tar -xzf cmake-$version.$build-Linux-x86_64.tar.gz
-      - cd cmake-$version.$build-Linux-x86_64/
+      - pushd cmake-$version.$build-Linux-x86_64/
       - sudo cp -r bin /usr/
       - sudo cp -r share /usr/
       - sudo cp -r doc /usr/share/
       - sudo cp -r man /usr/share/
-
+      - popd
+      - popd
