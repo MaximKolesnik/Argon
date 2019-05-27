@@ -31,7 +31,6 @@ matrix:
       - mkdir ~/temp
       - pushd ~/temp
       - wget https://cmake.org/files/v$version/cmake-$version.$build-Linux-x86_64.sh
-      - tar -xzf cmake-$version.$build-Linux-x86_64.tar.gz
       - sudo mkdir /opt/cmake
       - sudo sh cmake-$version.$build-Linux-x86_64.sh --prefix=/opt/cmake
       - pushd cmake-$version.$build-Linux-x86_64/
