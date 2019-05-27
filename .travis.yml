@@ -6,6 +6,9 @@ compiler:
 os:
 - linux
 ruby: 2.2.0
+before_install:
+	- sudo apt-get update
+	- sudo apt-get install -y cmake
 branches:
   only:
   - master
