@@ -1,6 +1,6 @@
 language: cpp
 sudo: required
-dist: bionic
+dist: serena
 
 branches:
   only:
@@ -23,8 +23,6 @@ matrix:
           - libxcb-image0-dev
     before_install:
       - sudo apt-get update
-      - sudo apt-get install g++-7
-      - sudo apt-get install build-essential
       - sudo apt-get purge cmake
       - version=3.13
       - build=3
