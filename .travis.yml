@@ -19,8 +19,8 @@ matrix:
           - libgl1-mesa-dev
           - libegl1-mesa-dev
           - libgles2-mesa-dev
-          - libxcb-util0-dev
-          - libxcb-image0-dev
+          - libglfw3
+          - libglfw3-dev
     before_install:
       - cmake --version
       - sudo apt-get update
