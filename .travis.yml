@@ -34,11 +34,11 @@ matrix:
       - wget https://cmake.org/files/v$version/cmake-$version.$build-Linux-x86_64.tar.gz
       - tar -xzf cmake-$version.$build-Linux-x86_64.tar.gz
       - pushd cmake-$version.$build-Linux-x86_64/
-      - sudo cp -r bin /usr/
+      - sudo cp -r bin /usr/bin/cmake/
       - sudo cp -r share /usr/
       - sudo cp -r doc /usr/share/
       - sudo cp -r man /usr/share/
       - popd
       - popd
       - cmake --version
-      - whereis cmake
+      - ls /usr/bin/cmake
