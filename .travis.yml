@@ -23,22 +23,5 @@ matrix:
           - libxcb-image0-dev
     before_install:
       - cmake --version
-      - whereis cmake
-      - sudo apt-get update
-      - sudo apt-get remove -y cmake
-      - cmake --version
-      - version=3.13
-      - build=3
-      - mkdir ~/temp
-      - pushd ~/temp
-      - wget https://cmake.org/files/v$version/cmake-$version.$build-Linux-x86_64.tar.gz
-      - tar -xzf cmake-$version.$build-Linux-x86_64.tar.gz
-      - pushd cmake-$version.$build-Linux-x86_64/
-      - sudo cp -r bin /usr/bin/cmake/
-      - sudo cp -r share /usr/
-      - sudo cp -r doc /usr/share/
-      - sudo cp -r man /usr/share/
-      - popd
-      - popd
-      - cmake --version
-      - ls /usr/bin/cmake
+      - ls /usr/local/cmake
+      - ls /usr/local/cmake-3.12.4/bin/cmake
