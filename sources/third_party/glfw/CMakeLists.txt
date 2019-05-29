@@ -5,7 +5,11 @@ project(GLFW C)
 set(CMAKE_LEGACY_CYGWIN_WIN32 OFF)
 
 if (POLICY CMP0054)
-    cmake_policy(SET CMP0054 NEW)
+	cmake_policy(SET CMP0054 NEW)
+endif()
+
+if (POLICY CMP0077)
+	cmake_policy(SET CMP0077 NEW)
 endif()
 
 set(GLFW_VERSION_MAJOR "3")
