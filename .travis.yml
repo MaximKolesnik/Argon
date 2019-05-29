@@ -25,6 +25,7 @@ matrix:
       - cmake --version
       - sudo apt-get update
       - sudo apt-get remove -y cmake
+      - sudo apt-get install -y libgl1-mesa-dev
       - version=3.13
       - build=3
       - wget https://cmake.org/files/v$version/cmake-$version.$build-Linux-x86_64.tar.gz
