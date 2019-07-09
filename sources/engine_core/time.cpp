@@ -5,7 +5,7 @@
 
 #include "time.hpp"
 
-namespace Argon::Core
+namespace Argon
 {
 class Time::TimePrivate final
 {
@@ -19,41 +19,41 @@ public:
 
 	static constexpr auto FPS_CAP = std::chrono::milliseconds(2);
 
-	float32 getDelta() const
+	float32 GetDelta() const
 	{
-		return getUnscaledDelta() * m_deltaScale;
+		return GetUnscaledDelta() * m_deltaScale;
 	}
 
-	float32 getUnscaledDelta() const
+	float32 GetUnscaledDelta() const
 	{
 		return m_lastDelta.count() / 1000.f;
 	}
 
-	void setDeltaScale(float32 val)
+	void SetDeltaScale(float32 val)
 	{
 		m_deltaScale = val;
 	}
 
-	float32 getDeltaScale() const
+	float32 GetDeltaScale() const
 	{
 		return m_deltaScale;
 	}
 
-	void endFrame()
+	void EndFrame()
 	{
-		updateLastDelta();
+		UpdateLastDelta();
 
 		if (m_lastDelta < FPS_CAP)
 		{
 			std::this_thread::sleep_for(FPS_CAP - m_lastDelta);
-			updateLastDelta();
+			UpdateLastDelta();
 		}
 
 		m_lastUpdate = ClockType::now();
 	}
 
 private:
-	void updateLastDelta()
+	void UpdateLastDelta()
 	{
 		m_lastDelta = std::chrono::duration_cast<StepPrecision>(
 			ClockType::now() - m_lastUpdate);
@@ -72,28 +72,28 @@ Time::Time()
 
 Time::~Time() = default;
 
-float32 Time::getDelta() const
+float32 Time::GetDelta() const
 {
-	return m_impl->getDelta();
+	return m_impl->GetDelta();
 }
 
-float32 Time::getUnscaledDelta() const
+float32 Time::GetUnscaledDelta() const
 {
-	return m_impl->getUnscaledDelta();
+	return m_impl->GetUnscaledDelta();
 }
 
-void Time::setDeltaScale(float32 val)
+void Time::SetDeltaScale(float32 val)
 {
-	m_impl->setDeltaScale(val);
+	m_impl->SetDeltaScale(val);
 }
 
-float32 Time::getDeltaScale() const
+float32 Time::GetDeltaScale() const
 {
-	return m_impl->getDeltaScale();
+	return m_impl->GetDeltaScale();
 }
 
-void Time::endFrame()
+void Time::EndFrame()
 {
-	m_impl->endFrame();
+	m_impl->EndFrame();
 }
-} // namespace Argon::Core
+} // namespace Argon

@@ -7,9 +7,16 @@ add_library (
 	SHARED
 	component.cpp
 	component.hpp
+	core.cpp
+	core.hpp
+	core_singleton.hpp
+	forward_declarations.hpp
 	game_object.cpp
 	game_object.hpp
-	main.cpp
+	system.cpp
+	system.hpp
+	system_manager.cpp
+	system_manager.hpp
 	time.cpp
 	time.hpp
 )

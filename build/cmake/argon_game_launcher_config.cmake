@@ -13,6 +13,7 @@ set (GLFW_VULKAN_STATIC OFF)
 message (OPENGL FOUND VAL ${OPENGL_FOUND})
 
 set (ARGON_PROJECTS
+	data_structures
 	engine_core
 	fundamental
 	game_launcher

@@ -1,0 +1,5 @@
+#!/bin/bash
+script_dir="$(dirname $(readlink -f $0))"
+mkdir -p $script_dir/solutions
+cmake -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_BUILD_TYPE=Debug -DARGON_TARGET=argon_unit_testing $script_dir/../sources/CMakeLists.txt -B"solutions/argon_unit_testing" -G"Unix Makefiles"
+make -C"solutions/argon_unit_testing"

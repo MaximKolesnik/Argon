@@ -6,12 +6,12 @@
 #include <fundamental/non_copyable.hpp>
 #include <fundamental/types.hpp>
 
-namespace Argon::Core
+namespace Argon
 {
 template <typename CompType>
 class Handle;
 
-class AR_SYM_EXPORT IComponentInternal
+class IComponentInternal
 	: public Argon::NonCopyable
 {
 public:
@@ -21,7 +21,7 @@ protected:
 	IComponentInternal();
 	~IComponentInternal();
 	static CompType s_typeCounter;
-	static CompType getType(const std::type_index& typeInd);
+	static CompType GetType(const std::type_index& typeInd);
 };
 
 template <typename DerivedT>
@@ -31,12 +31,12 @@ class IComponent
 	using Base = IComponentInternal;
 
 public:
-	static IComponentInternal::CompType getType()
+	static IComponentInternal::CompType GetType()
 	{
-		static auto type = Base::getType(std::type_index(typeid(DerivedT)));
+		static auto type = Base::GetType(std::type_index(typeid(DerivedT)));
 		return type;
 	}
 
 private:
 };
-} // namespace Argon::Core
+} // namespace Argon

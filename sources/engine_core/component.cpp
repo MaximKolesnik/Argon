@@ -4,7 +4,7 @@
 
 #include "component.hpp"
 
-namespace Argon::Core
+namespace Argon
 {
 IComponentInternal::IComponentInternal() = default;
 
@@ -12,7 +12,7 @@ IComponentInternal::~IComponentInternal() = default;
 
 IComponentInternal::CompType IComponentInternal::s_typeCounter = 0;
 
-IComponentInternal::CompType IComponentInternal::getType(const std::type_index& typeInd)
+IComponentInternal::CompType IComponentInternal::GetType(const std::type_index& typeInd)
 {
 	static std::unordered_map<std::type_index, IComponentInternal::CompType> m_typeMap = {};
 
@@ -21,10 +21,10 @@ IComponentInternal::CompType IComponentInternal::getType(const std::type_index& 
 	{
 		const auto inserted = m_typeMap.insert({typeInd, s_typeCounter++});
 		AR_ASSERT_MSG(inserted.second,
-			"IComponentInternal::getType :: cannot register component");
+			"IComponentInternal::GetType :: cannot register component");
 		return inserted.first->second;
 	}
 
 	return it->second;
 }
-} // namespace Argon::Core
+} // namespace Argon

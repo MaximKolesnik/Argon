@@ -22,6 +22,7 @@ using float32 = float;
 using float64 = double;
 
 using byte = std::byte;
+using sizet = std::size_t;
 
 static_assert(sizeof(int8) == 1, "int8 must be 8 bits");
 static_assert(sizeof(int16) == 2, "int16 must be 16 bits");

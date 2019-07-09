@@ -6,23 +6,26 @@
 #include <fundamental/helper_macros.hpp>
 #include <fundamental/types.hpp>
 
-namespace Argon::Core
+#include "core_singleton.hpp"
+
+namespace Argon
 {
 class AR_SYM_EXPORT Time final
+	: public CoreSingleton
 {
 public:
 	Time();
 	~Time();
 
-	float32 getDelta() const;
-	float32 getUnscaledDelta() const;
+	float32 GetDelta() const;
+	float32 GetUnscaledDelta() const;
 
-	void setDeltaScale(float32 val);
-	float32 getDeltaScale() const;
+	void SetDeltaScale(float32 val);
+	float32 GetDeltaScale() const;
 
-	void endFrame();
+	void EndFrame();
 
 private:
 	AR_PRIVATE_IMPL(Time);
 };
-} // namespace Argon::Core
+} // namespace Argon

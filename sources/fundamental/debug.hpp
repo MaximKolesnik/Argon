@@ -3,10 +3,12 @@
 #include <cassert>
 #include <iostream>
 
-//TODO fix AR_ASSERT_MSG
+// TODO fix AR_ASSERT_MSG
+// TODO fix AR_CRITICAL
 
 #define AR_ASSERT(EXPR) assert(EXPR)
 #define AR_ASSERT_MSG(EXPR, MSG) assert(EXPR)
+#define AR_CRITICAL(EXPR, MSG) AR_ASSERT_MSG(EXPR, MSG)
 
 namespace Argon
 {
