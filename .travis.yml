@@ -22,7 +22,9 @@ branches:
   only:
     - "/.*/"
 
-script: ./build/linux_build
+script:
+  - ./build/linux_build
+  - ./build/linux_build_unit_tests
 
 matrix:
   include:
