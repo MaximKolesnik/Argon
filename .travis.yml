@@ -17,6 +17,7 @@ install:
   - tar -xzf cmake-$version.$build-Linux-x86_64.tar.gz
   - export PATH=${PWD}/cmake-$version.$build-Linux-x86_64/bin:${PATH}
   - cmake --version
+  - hash -r
   - sudo apt-get install -y libgtest-dev
   - pushd /usr/src/gtest
   - ls 
