@@ -21,6 +21,7 @@ install:
 branches:
   only:
     - "/.*/"
+
 script: ./build/linux_build
 
 matrix:
