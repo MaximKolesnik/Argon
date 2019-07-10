@@ -2,6 +2,22 @@ language: cpp
 sudo: required
 dist: serena
 
+install:
+  - cmake --version
+  - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+  - sudo apt-get update
+  - sudo apt-get remove -y cmake
+  - sudo apt-get install -y g++-7
+  - sudo apt-get install -y libgl1-mesa-dev
+  - sudo apt-get install -y libglfw3
+  - sudo apt-get install -y libglfw3-dev
+  - version=3.13
+  - build=3
+  - wget https://cmake.org/files/v$version/cmake-$version.$build-Linux-x86_64.tar.gz
+  - tar -xzf cmake-$version.$build-Linux-x86_64.tar.gz
+  - export PATH=${PWD}/cmake-$version.$build-Linux-x86_64/bin:${PATH}
+  - cmake --version
+
 branches:
   only:
     - "/.*/"
@@ -11,18 +27,3 @@ matrix:
   include:
   - os: linux
     compiler: clang-6.0
-    before_install:
-      - cmake --version
-      - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
-      - sudo apt-get update
-      - sudo apt-get remove -y cmake
-      - sudo apt-get install -y g++-7
-      - sudo apt-get install -y libgl1-mesa-dev
-      - sudo apt-get install -y libglfw3
-      - sudo apt-get install -y libglfw3-dev
-      - version=3.13
-      - build=3
-      - wget https://cmake.org/files/v$version/cmake-$version.$build-Linux-x86_64.tar.gz
-      - tar -xzf cmake-$version.$build-Linux-x86_64.tar.gz
-      - export PATH=${PWD}/cmake-$version.$build-Linux-x86_64/bin:${PATH}
-      - cmake --version
