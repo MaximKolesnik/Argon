@@ -4,8 +4,7 @@ dist: serena
 
 branches:
   only:
-    - master
-    - "/^v\\d+\\./"
+    - "/.*/"
 script: ./build/linux_build
 
 matrix:
@@ -27,4 +26,3 @@ matrix:
       - tar -xzf cmake-$version.$build-Linux-x86_64.tar.gz
       - export PATH=${PWD}/cmake-$version.$build-Linux-x86_64/bin:${PATH}
       - cmake --version
-
