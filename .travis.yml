@@ -16,15 +16,6 @@ install:
   - wget https://cmake.org/files/v$version/cmake-$version.$build-Linux-x86_64.tar.gz
   - tar -xzf cmake-$version.$build-Linux-x86_64.tar.gz
   - export PATH=${PWD}/cmake-$version.$build-Linux-x86_64/bin:${PATH}
-  - cmake --version
-  - hash -r
-  - sudo apt-get install -y libgtest-dev
-  - pushd /usr/src/gtest
-  - ls 
-  - sudo cmake CMakeLists.txt
-  - sudo make
-  - sudo cp *.a /usr/lib
-  - popd
 
 branches:
   only:

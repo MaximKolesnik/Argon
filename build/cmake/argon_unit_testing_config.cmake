@@ -6,6 +6,7 @@ set (ARGON_PROJECTS
 	fundamental
 	data_structures
 	math
+	third_party/gtest
 	unit_testing/data_structures_test
 	unit_testing/test_launcher
 )

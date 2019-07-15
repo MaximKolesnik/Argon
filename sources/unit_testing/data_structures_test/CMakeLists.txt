@@ -11,6 +11,8 @@ target_link_libraries (
 	${PROJECT_NAME}
 	PUBLIC
 	data_structures
+	gtest
+	pthread
 )
 
 set_target_properties (
