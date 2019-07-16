@@ -16,7 +16,8 @@ set (
 	"-Weverything -Werror -Wno-c++98-compat -Wno-c++98-compat-pedantic \
 	-Wno-float-equal -Wno-global-constructors -Wno-comma -Wno-c++98-compat-pedantic \
 	-Wno-weak-vtables -Wno-exit-time-destructors \
-	-std=c++17 -fms-extensions -fno-exceptions -fvisibility=hidden -mavx")
+	-std=c++17 -fms-extensions -fno-exceptions -Wno-undef \
+	-fvisibility=hidden -mavx")
 
 set_property (GLOBAL PROPERTY CXX_STANDARD 17)
 
