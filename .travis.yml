@@ -28,9 +28,7 @@ matrix:
 
 jobs:
   include:
-    - stage: "Build"
-      script: ./build/linux_build
-    - stage: "Unit Tests Build"
-      script: ./build/linux_build_unit_tests
     - stage: "Run Unit Tests"
-      script: ./build/linux_build_unit_tests && ./build/run_unit_tests
+      script:
+        - ./build/linux_build_unit_tests
+        - ./build/run_unit_tests
