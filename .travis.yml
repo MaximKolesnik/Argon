@@ -21,10 +21,6 @@ branches:
   only:
     - "/.*/"
 
-script:
-  - ./build/linux_build
-  - ./build/linux_build_unit_tests
-
 matrix:
   include:
   - os: linux
