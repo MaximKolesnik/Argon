@@ -1,6 +1,5 @@
 #!/bin/bash
 script_dir="$(dirname $(readlink -f $0))"
 path=$(cmake $script_dir/../sources/CMakeLists.txt -B"solutions/argon_unit_testing" -L -N | grep CMAKE_RUNTIME_OUTPUT_DIRECTORY | cut -d "=" -f2)
-pushd $path
+cd $path
 ./test_launcher
-popd
