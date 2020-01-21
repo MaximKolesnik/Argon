@@ -1,20 +1,12 @@
-cmake_minimum_required (VERSION 3.13.3)
+cmake_minimum_required(VERSION 3.16.2)
 
-project (fundamental)
+project(fundamental CXX)
 
-add_library (
-	${PROJECT_NAME}
-	compiler_macros.hpp
-	debug.hpp
-	helper_macros.hpp
-	non_copyable.hpp
-	types.hpp
-	)
+add_library(${PROJECT_NAME} INTERFACE)
 
 target_include_directories (
 	${PROJECT_NAME}
-	PUBLIC
-	${CMAKE_CURRENT_SOURCE_DIR}/../
-	)
+	INTERFACE
+	"${CMAKE_CURRENT_SOURCE_DIR}/include")
 
-set_target_properties (${PROJECT_NAME} PROPERTIES LINKER_LANGUAGE CXX)
+add_library(Argon::${PROJECT_NAME} ALIAS ${PROJECT_NAME})

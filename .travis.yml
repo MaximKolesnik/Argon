@@ -29,10 +29,10 @@ matrix:
 jobs:
   include:
     - stage: "Build"
-      script: ./build/linux_build
+      script: ./build/linux_build build game_launcher
     - stage: "Unit Tests Build"
-      script: ./build/linux_build_unit_tests
+      script: ./build/linux_build build test_launcher
     - stage: "Run Unit Tests"
       script:
-        - ./build/linux_build_unit_tests
+        - ./build/linux_build build test_launcher
         - ./build/run_unit_tests

@@ -1,27 +1,31 @@
-cmake_minimum_required (VERSION 3.13.3)
+cmake_minimum_required (VERSION 3.16.2)
 
-project (render)
+project (render CXX)
 
-add_library (
+add_library (${PROJECT_NAME} SHARED)
+
+target_sources(
 	${PROJECT_NAME}
-	SHARED
-	shader_loader.cpp
-	shader_loader.hpp
-	simple_app.cpp
-	simple_app.hpp
-	)
+	INTERFACE
+	include/render/shader_loader.hpp
+	include/render/simple_app.hpp
+	PRIVATE
+	src/shader_loader.cpp
+	src/simple_app.cpp)
+
+target_include_directories(
+	${PROJECT_NAME}
+	PUBLIC
+	"${CMAKE_CURRENT_SOURCE_DIR}/include"
+	PRIVATE
+	"${CMAKE_CURRENT_SOURCE_DIR}/include/render")
 
 target_link_libraries (
 	${PROJECT_NAME}
 	PRIVATE
-	fundamental
-	math
+	Argon::fundamental
+	Argon::math
 	gl
-	glfw
-)
+	glfw)
 
-set_target_properties (
-	${PROJECT_NAME}
-	PROPERTIES
-	LINKER_LANGUAGE CXX
-	)
+add_library(Argon::${PROJECT_NAME} ALIAS ${PROJECT_NAME})

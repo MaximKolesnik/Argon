@@ -1,17 +1,22 @@
-cmake_minimum_required (VERSION 3.13.3)
+cmake_minimum_required(VERSION 3.16.2)
 
-project (data_structures)
+project(data_structures CXX)
 
-add_library (
+add_library(${PROJECT_NAME} INTERFACE)
+
+target_sources(
 	${PROJECT_NAME}
-  SHARED
-	slot_map.hpp
-	)
+	INTERFACE
+	include/data_structures/slot_map.hpp)
+
+target_include_directories(
+	${PROJECT_NAME}
+	INTERFACE
+	"${CMAKE_CURRENT_SOURCE_DIR}/include")
 
 target_link_libraries(
 	${PROJECT_NAME}
-	PUBLIC
-	fundamental
-	)
+	INTERFACE
+	Argon::fundamental)
 
-set_target_properties (${PROJECT_NAME} PROPERTIES LINKER_LANGUAGE CXX)
+add_library(Argon::${PROJECT_NAME} ALIAS ${PROJECT_NAME})

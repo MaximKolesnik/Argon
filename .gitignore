@@ -1,2 +1,4 @@
 CMakeLists.txt.user
 build/solutions/
+CMakeCache.txt
+mcb.history.json

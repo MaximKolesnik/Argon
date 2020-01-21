@@ -35,8 +35,9 @@ int main()
 
 	while (true)
 	{
-		std::cout << "outside dt: " << Argon::Core::GetInstance().Get<Argon::Time>().GetDelta() << std::endl;
-		std::cout << "outsidefps: " <<  1.f / (Argon::Core::GetInstance().Get<Argon::Time>().GetDelta()) << std::endl;
+		//std::cout << "outside dt: " << Argon::Core::GetInstance().Get<Argon::Time>().GetDelta() << std::endl;
+		//std::cout << "outsidefps: " <<  1.f / (Argon::Core::GetInstance().Get<Argon::Time>().GetDelta()) << std::endl;
 		engineCore.tick();
 	}
 }
+

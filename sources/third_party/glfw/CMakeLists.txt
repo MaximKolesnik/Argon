@@ -3,11 +3,16 @@ cmake_minimum_required(VERSION 3.0)
 project(GLFW C)
 
 set(CMAKE_LEGACY_CYGWIN_WIN32 OFF)
+set(GLFW_BUILD_EXAMPLES OFF)
+set(GLFW_BUILD_TESTS OFF)
+set(GLFW_BUILD_DOCS OFF)
+set(GLFW_INSTALL OFF)
+set(GLFW_VULKAN_STATIC OFF)
 
 if (POLICY CMP0054)
 	cmake_policy(SET CMP0054 NEW)
 endif()
-
+ 
 if (POLICY CMP0077)
 	cmake_policy(SET CMP0077 NEW)
 endif()

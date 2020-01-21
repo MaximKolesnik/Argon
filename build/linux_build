@@ -1,5 +1,29 @@
 #!/bin/bash
+
+# $1 - execution type
+# $2 - project
+# $3 - other variable 1
+
 script_dir="$(dirname $(readlink -f $0))"
-mkdir -p $script_dir/solutions
-cmake -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_BUILD_TYPE=Debug -DARGON_TARGET=argon_game_launcher $script_dir/../sources/CMakeLists.txt -B"solutions/argon_game_launcher" -G"Unix Makefiles"
-make -C"solutions/argon_game_launcher"
+working_dir="$script_dir/../"
+
+if [ $1 = "build" ]
+then
+	mkdir -p $script_dir/solutions
+	cmake -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_BUILD_TYPE=Debug -DARGON_TARGET=argon_$2 ${working_dir}/sources/CMakeLists.txt -B"$script_dir/solutions/argon_$2" -G"Ninja"
+	ninja -C"$script_dir/solutions/argon_$2"
+elif [ $1 = "run" ]
+then
+	.${working_dir##/*}/binaries/bin/$2
+	disown
+elif [ $1 = "buildCurrentFile" ]
+then
+	mkdir -p $script_dir/solutions
+	cmake -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_BUILD_TYPE=Debug -DARGON_TARGET=argon_$2 ${working_dir}/sources/CMakeLists.txt -B"$script_dir/solutions/argon_$2" -G"Ninja"
+	ninja -C"$script_dir/solutions/argon_$2" $working_dir$3^
+elif [ $1 = "clean" ]
+then
+	ninja -C"$script_dir/solutions/argon_$2" -t clean
+else
+	echo "Error: unrecognized execution type"
+fi

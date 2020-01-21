@@ -1,0 +1,46 @@
+{
+	"version": "1.0.0",
+	"configTypes": [
+		{
+			"name": "Project",
+			"options": [
+				{
+					"name": "Game Launcher",
+					"flags": "game_launcher"
+				},
+				{
+					"name": "Unit Tests",
+					"flags": "test_launcher"
+				}
+			]
+		}
+	],
+	"build": {
+		"command": "./build/linux_build build $mcb{Project}$"
+	},
+	"buildCurrentFile": {
+		"command": "./build/linux_build buildCurrentFile $mcb{Project}$ $mcb{currentFile}$",
+		"extensions": ".c;.cpp"
+	},
+	"debug": {
+		"name": "mcb debug",
+		"type": "cppdbg",
+		"request": "launch",
+		"program": "${workspaceFolder}/binaries/bin/$mcb{Project}$",
+		"stopAtEntry": false,
+		"cwd": "${workspaceFolder}",
+		"setupCommands": [
+			{
+				"description": "Enable pretty-printing for gdb",
+				"text": "-enable-pretty-printing",
+				"ignoreFailures": false
+			}
+		]
+	},
+	"run": {
+		"command": "./build/linux_build build $mcb{Project}$ && ./build/linux_build run $mcb{Project}$"
+	},
+	"clean": {
+		"command": "./build/linux_build clean $mcb{Project}$"
+	}
+}
