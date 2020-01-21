@@ -1,38 +1,57 @@
 language: cpp
 sudo: required
-dist: serena
+dist: bionic
 
 install:
   - cmake --version
   - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
   - sudo apt-get update
   - sudo apt-get remove -y cmake
+  - sudo apt-get install -y ninja-build
   - sudo apt-get install -y g++-7
   - sudo apt-get install -y libgl1-mesa-dev
   - sudo apt-get install -y libglfw3
   - sudo apt-get install -y libglfw3-dev
-  - version=3.13
-  - build=3
+  - sudo apt-get install xorg-dev libglu1-mesa-dev
+  - version=3.16
+  - build=2
   - wget https://cmake.org/files/v$version/cmake-$version.$build-Linux-x86_64.tar.gz
   - tar -xzf cmake-$version.$build-Linux-x86_64.tar.gz
   - export PATH=${PWD}/cmake-$version.$build-Linux-x86_64/bin:${PATH}
+
+script: skip
 
 branches:
   only:
     - "/.*/"
 
-matrix:
-  include:
-  - os: linux
-    compiler: clang-6.0
-
 jobs:
   include:
-    - stage: "Build"
-      script: ./build/linux_build build game_launcher
-    - stage: "Unit Tests Build"
-      script: ./build/linux_build build test_launcher
-    - stage: "Run Unit Tests"
-      script:
+  - script:
+        - ./build/linux_build build game_launcher
+    name: "Build"
+    os: linux
+    compiler: clang
+    addons:
+      apt:
+        packages:
+        - clang-9
+  - script:
+        - ./build/linux_build build test_launcher
+    name: "Unit Tests Build"
+    os: linux
+    compiler: clang
+    addons:
+      apt:
+        packages:
+        - clang-9
+  - script:
         - ./build/linux_build build test_launcher
         - ./build/run_unit_tests
+    name: "Run Unit Tests"
+    os: linux
+    compiler: clang
+    addons:
+      apt:
+        packages:
+        - clang-9

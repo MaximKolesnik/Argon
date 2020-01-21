@@ -2,5 +2,4 @@
 script_dir="$(dirname $(readlink -f $0))"
 path=$(cmake $script_dir/../sources/CMakeLists.txt -B"build/solutions/argon_test_launcher" -L -N | grep CMAKE_RUNTIME_OUTPUT_DIRECTORY | cut -d "=" -f2)
 cd $path
-echo $path
 ./test_launcher

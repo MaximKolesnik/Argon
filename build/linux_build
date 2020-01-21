@@ -10,7 +10,7 @@ working_dir="$script_dir/../"
 if [ $1 = "build" ]
 then
 	mkdir -p $script_dir/solutions
-	cmake -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_BUILD_TYPE=Debug -DARGON_TARGET=argon_$2 ${working_dir}/sources/CMakeLists.txt -B"$script_dir/solutions/argon_$2" -G"Ninja"
+	cmake -DCMAKE_CXX_COMPILER=clang++-9 -DCMAKE_BUILD_TYPE=Debug -DARGON_TARGET=argon_$2 ${working_dir}/sources/CMakeLists.txt -B"$script_dir/solutions/argon_$2" -G"Ninja"
 	ninja -C"$script_dir/solutions/argon_$2"
 elif [ $1 = "run" ]
 then
@@ -19,7 +19,7 @@ then
 elif [ $1 = "buildCurrentFile" ]
 then
 	mkdir -p $script_dir/solutions
-	cmake -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_BUILD_TYPE=Debug -DARGON_TARGET=argon_$2 ${working_dir}/sources/CMakeLists.txt -B"$script_dir/solutions/argon_$2" -G"Ninja"
+	cmake -DCMAKE_CXX_COMPILER=clang++-9 -DCMAKE_BUILD_TYPE=Debug -DARGON_TARGET=argon_$2 ${working_dir}/sources/CMakeLists.txt -B"$script_dir/solutions/argon_$2" -G"Ninja"
 	ninja -C"$script_dir/solutions/argon_$2" $working_dir$3^
 elif [ $1 = "clean" ]
 then
