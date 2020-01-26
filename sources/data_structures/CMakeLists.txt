@@ -4,11 +4,6 @@ project(data_structures CXX)
 
 add_library(${PROJECT_NAME} INTERFACE)
 
-target_sources(
-	${PROJECT_NAME}
-	INTERFACE
-	include/data_structures/slot_map.hpp)
-
 target_include_directories(
 	${PROJECT_NAME}
 	INTERFACE

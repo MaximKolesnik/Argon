@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.13.3)
+cmake_minimum_required (VERSION 3.16.2)
 
 project (data_structures_test)
 
@@ -12,6 +12,12 @@ target_link_libraries (
 	PUBLIC
 	data_structures
 	gtest
+)
+
+target_compile_options(
+	${PROJECT_NAME}
+	PRIVATE
+	"-Wno-used-but-marked-unused" "-Wno-covered-switch-default"
 )
 
 set_target_properties (

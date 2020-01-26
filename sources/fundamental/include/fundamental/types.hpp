@@ -17,6 +17,7 @@ using uint64 = std::uint64_t;
 
 using intptr = std::intptr_t;
 using uintptr = std::uintptr_t;
+using ptrdiff = std::ptrdiff_t;
 
 using float32 = float;
 using float64 = double;
@@ -36,6 +37,7 @@ static_assert(sizeof(uint64) == 8, "uint64 must be 64 bits");
 
 static_assert(sizeof(intptr) == 8, "intptr must be 64 bits");
 static_assert(sizeof(uintptr) == 8, "uintptr must be 64 bits");
+static_assert(sizeof(ptrdiff) == 8, "ptrdiff must be 64 bits");
 
 static_assert(sizeof(float32) == 4, "float32 must be 32 bits");
 static_assert(sizeof(float64) == 8, "float64 must be 64 bits");
