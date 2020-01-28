@@ -5,6 +5,7 @@ project (data_structures_test)
 add_library (
 	${PROJECT_NAME}
   slot_map_test.cpp
+	sparse_storage_test.cpp
 )
 
 target_link_libraries (

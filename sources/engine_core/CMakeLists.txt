@@ -6,19 +6,17 @@ add_library(${PROJECT_NAME} SHARED)
 
 target_sources(
 	${PROJECT_NAME}
-	INTERFACE
+	PUBLIC
 	include/engine_core/component.hpp
 	include/engine_core/core_singleton.hpp
 	include/engine_core/core.hpp
 	include/engine_core/forward_declarations.hpp
-	include/engine_core/game_object.hpp
 	include/engine_core/system_manager.hpp
 	include/engine_core/system.hpp
 	include/engine_core/time.hpp
 	PRIVATE
 	src/component.cpp
 	src/core.cpp
-	src/game_object.cpp
 	src/system_manager.cpp
 	src/system.cpp
 	src/time.cpp)

@@ -14,7 +14,6 @@
 
 namespace Argon
 {
-// TODO add iterators
 template <typename ObjType, uint32 NUM_OBJECTS_PER_PAGE = 64>
 class SlotMap final
 {
@@ -67,7 +66,7 @@ public:
 	private:
 		DirectMemPage* m_pages;
 		uint32 m_index;
-		byte _pad[4];
+		AR_ATTR_UNUSED byte _pad[4];
 	};
 
 	class Slot final
@@ -100,6 +99,8 @@ public:
 	void erase(Slot slot);
 	bool isSlotValid(Slot slot) const;
 	
+	sizet size() const { return static_cast<sizet>(m_size); }
+
 	const_iterator_type cbegin() const { return const_iterator_type(m_directPages.data(), 0u); }
 	const_iterator_type begin() const { return const_iterator_type(m_directPages.data(), 0u); }
 	iterator_type begin() { return iterator_type(m_directPages.data(), 0u); }
