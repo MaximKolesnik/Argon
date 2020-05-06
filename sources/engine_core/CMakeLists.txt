@@ -15,6 +15,7 @@ target_sources(
 	include/engine_core/forward_declarations.hpp
 	include/engine_core/reflection.hpp
 	include/engine_core/service.hpp
+	include/engine_core/space.hpp
 	include/engine_core/system_manager.hpp
 	include/engine_core/system.hpp
 	include/engine_core/time.hpp
@@ -28,6 +29,7 @@ target_sources(
 	src/entity_manager.cpp
 	src/entity.cpp
 	src/filesystem.cpp
+	src/space.cpp
 	src/system_manager.cpp
 	src/time.cpp)
 
@@ -50,7 +52,6 @@ target_link_libraries(
 	Argon::data_structures
 	Argon::fundamental
 	Argon::math
-	Argon::render
 	thirdparty::sole)
 
 add_library(Argon::${PROJECT_NAME} ALIAS ${PROJECT_NAME})

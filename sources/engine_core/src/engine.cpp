@@ -3,12 +3,11 @@
 
 #include <fundamental/debug.hpp>
 
-#include <render/simple_app.hpp>
-
 #include "private/plugin/plugin_manager.hpp"
 #include "engine.hpp"
 #include "filesystem.hpp"
 #include "reflection.hpp"
+#include "space.hpp"
 #include "time.hpp"
 
 namespace Argon
@@ -20,6 +19,7 @@ static Engine* s_engine = nullptr;
 
 Engine::Engine(const std::string &workDir)
 	: m_workingDir(workDir)
+	, m_shutdown(false)
 {
 	s_engine = this;
 
@@ -38,10 +38,14 @@ Engine::Engine(const std::string &workDir)
 
 	m_pluginManager = std::make_unique<PluginManager>();
 	m_pluginManager->initialize();
+
+	m_space = std::make_unique<Space>();
 }
 
 Engine::~Engine()
 {
+	m_space.reset();
+	
 	for (auto &sp : m_services)
 	{
 		sp.first.get_method("finalize").invoke(sp.second);
@@ -65,14 +69,9 @@ void Engine::exec()
 {
 	Time timer;
 
-	SimpleApp app;
-
-	app.prepare();
-	while (!app.shouldClose())
+	while (!m_shutdown)
 	{
-		app.tick();
+		m_space->tick();
 	}
-
-	app.close();
 }
 } // namespace Argon

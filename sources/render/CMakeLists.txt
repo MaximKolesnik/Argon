@@ -25,6 +25,7 @@ target_link_libraries (
 	PRIVATE
 	Argon::fundamental
 	Argon::math
+	Argon::engine_core
 	gl
 	glfw)
 

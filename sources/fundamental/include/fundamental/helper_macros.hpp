@@ -1,8 +1,8 @@
 #pragma once
 
+#include "compiler_macros.hpp"
+
 namespace Argon
-{
-namespace Windowing
 {
 #define AR_PRIVATE_IMPL(className) \
 	class className##Private; \
@@ -10,5 +10,7 @@ namespace Windowing
 	std::unique_ptr<className##Private> m_impl
 
 #define AR_UNUSED(expr) (void)(expr)
-} // namespace Windowing
+
+#define AR_PAD(bytes) \
+	AR_ATTR_UNUSED byte _pad[bytes]
 } // namespace Argon

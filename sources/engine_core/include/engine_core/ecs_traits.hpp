@@ -41,19 +41,19 @@ template <typename T>
 inline constexpr bool HasFinalizeMemberV = HasFinalizeMember<T>::value;
 
 template <typename, typename = void>
-struct HasUpdateMember
+struct HasTickMember
 {
 	inline static constexpr bool value = false;
 };
 
 template <typename T>
-struct HasUpdateMember<T, std::void_t<decltype(&T::update)>>
+struct HasTickMember<T, std::void_t<decltype(&T::tick)>>
 {
 	inline static constexpr bool value =
-		std::is_invocable<decltype(&T::update), T, float32>::value &&
-		std::is_same_v<typename std::result_of<decltype(&T::update)(T, float32)>::type, void>;
+		std::is_invocable<decltype(&T::tick), T>::value &&
+		std::is_same_v<typename std::result_of<decltype(&T::tick)(T)>::type, void>;
 };
 
 template <typename T>
-inline constexpr bool HasUpdateMemberV = HasUpdateMember<T>::value;
+inline constexpr bool HasTickMemberV = HasTickMember<T>::value;
 } // namespace Argon::ECSTraits

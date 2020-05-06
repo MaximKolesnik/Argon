@@ -21,9 +21,7 @@ void SimpleAppSystem::finalize()
 	app.close();
 }
 
-void SimpleAppSystem::update(Argon::float32 dt)
+void SimpleAppSystem::tick()
 {
-	AR_UNUSED(dt);
-
 	app.tick();
 }

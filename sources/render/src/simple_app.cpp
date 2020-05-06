@@ -1,3 +1,5 @@
+#include <engine_core/engine.hpp>
+
 #include "shader_loader.hpp"
 #include "simple_app.hpp"
 
@@ -78,6 +80,11 @@ void SimpleApp::tick()
 	glDrawArrays( GL_TRIANGLES, 0, NumVertices );
 	glfwSwapBuffers(window);
 	glfwPollEvents();
+
+	if (shouldClose())
+	{
+		Argon::Engine::instance().shutdown();
+	}
 }
 
 void SimpleApp::close()

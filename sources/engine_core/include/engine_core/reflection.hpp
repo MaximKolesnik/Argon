@@ -33,4 +33,5 @@ rttr::registration::class_<Type>(#Type) \
 (rttr::policy::ctor::as_raw_ptr) \
 (rttr::metadata(Argon::Reflection::C_META_CLASS_TYPE, Argon::Reflection::ClassType::System)) \
 .method("initialize", &Type::initialize) \
-.method("finalize", &Type::finalize)
+.method("finalize", &Type::finalize) \
+.method("tick", &Type::tick)
