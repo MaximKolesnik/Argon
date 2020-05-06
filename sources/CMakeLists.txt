@@ -12,7 +12,7 @@ function(add_compile_options_config CONFIG)
 	endforeach()
 endfunction()
 
-# reconsider this. probably most or all of the compile options should be set
+# TODO reconsider this. probably most or all of the compile options should be set
 # in all targets
 add_compile_options_config(
 	DEBUG
@@ -44,5 +44,5 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin CACHE STRING "OUTPUT DIR" FORCE)
 set(CMAKE_MODULE_PATH "${ARGON_SOURCE_DIR}/../build/cmake")
-
+set(ARGON_PLUGINS "${CMAKE_BINARY_DIR}/bin/plugins")
 include(${ARGON_TARGET}_config)

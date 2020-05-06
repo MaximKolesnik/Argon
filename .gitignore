@@ -2,3 +2,6 @@ CMakeLists.txt.user
 build/solutions/
 CMakeCache.txt
 mcb.history.json
+binaries/
+sources/third_party/rttr/rttr096
+/argonWorkspace.code-workspace

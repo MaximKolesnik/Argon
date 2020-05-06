@@ -6,12 +6,9 @@
 #include <fundamental/helper_macros.hpp>
 #include <fundamental/types.hpp>
 
-#include "core_singleton.hpp"
-
 namespace Argon
 {
 class AR_SYM_EXPORT Time final
-	: public CoreSingleton
 {
 public:
 	Time();

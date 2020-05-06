@@ -15,9 +15,6 @@ target_sources (
 target_link_libraries (
 	${PROJECT_NAME}
 	PRIVATE
-	Argon::data_structures
 	Argon::engine_core
 	Argon::fundamental
-	Argon::math
-	Argon::render
 )
