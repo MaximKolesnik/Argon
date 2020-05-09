@@ -1,14 +1,15 @@
+#include <rttr/registration.h>
+
 #include <engine_core/reflection.hpp>
 
 #include <fundamental/helper_macros.hpp>
 
-#include <rttr/registration.h>
 
 #include "plugin.hpp"
 
 RTTR_PLUGIN_REGISTRATION
 {
-REGISTER_SYSTEM(SimpleAppSystem);
+	Argon::Reflection::System<SimpleAppSystem>("SimpleAppSystem");
 }
 
 void SimpleAppSystem::initialize()

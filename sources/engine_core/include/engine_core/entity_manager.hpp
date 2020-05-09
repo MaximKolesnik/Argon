@@ -1,6 +1,6 @@
 #pragma once
 
-#include <data_structures/sparse_storage.hpp>
+#include <memory>
 
 #include <fundamental/non_copyable.hpp>
 
@@ -8,6 +8,8 @@
 
 namespace Argon
 {
+class SlotGenerator;
+
 class EntityManager final
 	: NonCopyable
 {
@@ -16,9 +18,9 @@ public:
 	~EntityManager();
 
 	Entity createEntity();
-
+	bool isValid(const Entity& e) const;
 
 private:
-	SlotGenerator m_entitySlotGenerator;
+	std::unique_ptr<SlotGenerator> m_entitySlotGenerator;
 };
 } // namespace Argon

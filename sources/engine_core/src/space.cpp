@@ -16,8 +16,8 @@ Space::~Space() = default;
 
 void Space::tick()
 {
-	Debug::statusMsg("Space tick begin");
+	//Debug::statusMsg("Space tick begin");
 	m_systemManager->tick();
-	Debug::statusMsg("Space tick end");
+	//Debug::statusMsg("Space tick end");
 }
 } // namespace Argon

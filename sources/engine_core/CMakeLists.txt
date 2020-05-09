@@ -7,7 +7,6 @@ add_library(${PROJECT_NAME} SHARED)
 target_sources(
 	${PROJECT_NAME}
 	PUBLIC
-	include/engine_core/component.hpp
 	include/engine_core/engine.hpp
 	include/engine_core/entity_manager.hpp
 	include/engine_core/entity.hpp
@@ -24,7 +23,6 @@ target_sources(
 
 	src/private/plugin/plugin_manager.cpp
 
-	src/component.cpp
 	src/engine.cpp
 	src/entity_manager.cpp
 	src/entity.cpp

@@ -8,7 +8,7 @@
 
 RTTR_REGISTRATION
 {
-REGISTER_SERVICE(Argon::Filesystem);
+	Argon::Reflection::Service<Argon::Filesystem>("Filesystem");
 }
 
 namespace Argon

@@ -18,6 +18,9 @@ public:
 		inline static constexpr uint32 INVALID_INDEX = 0xFFFFFF;
 
 	public:
+		using IndexType = uint32;
+		using GenType = uint64;
+
 		Slot();
 
 		bool operator==(const Slot &rhs)
@@ -26,15 +29,15 @@ public:
 		}
 		bool operator!=(const Slot &rhs) { return !(*this == rhs); }
 
-		uint32 getIndex() const { return m_index; }
-		uint64 getGeneration() const { return m_generation; }
+		IndexType getIndex() const { return m_index; }
+		GenType getGeneration() const { return m_generation; }
 
 	private:
 		friend class SlotGenerator;
 		template <typename> friend class SparseStorage;
 
-		uint32 m_index : 24;
-		uint64 m_generation : 40;
+		IndexType m_index : 24;
+		GenType m_generation : 40;
 	};
 
 	inline static constexpr uint32 SLOTS_PER_PAGES = 64u;
@@ -160,11 +163,11 @@ void SparseStorage<TData>::assign(SlotGenerator::Slot slot, Args &&...args)
 
 	_prepareRedirectionMemory(slot);
 
-	const uint32 pageNum = slot.m_index / SlotGenerator::SLOTS_PER_PAGES;
-	const uint32 offset = slot.m_index % SlotGenerator::SLOTS_PER_PAGES;
+	const auto pageNum = slot.m_index / SlotGenerator::SLOTS_PER_PAGES;
+	const auto offset = slot.m_index % SlotGenerator::SLOTS_PER_PAGES;
 
 	SlotGenerator::Slot& internalSlot = m_redirection[pageNum].m_memory[offset];
-	internalSlot.m_index = static_cast<uint32>(m_storage.size());
+	internalSlot.m_index = static_cast<SlotGenerator::Slot::IndexType>(m_storage.size());
 	internalSlot.m_generation = slot.m_generation;
 
 	m_storage.emplace_back(std::forward<Args>(args)...);
@@ -173,8 +176,8 @@ void SparseStorage<TData>::assign(SlotGenerator::Slot slot, Args &&...args)
 template <typename TData>
 bool SparseStorage<TData>::has(SlotGenerator::Slot slot) const
 {
-	const uint32 pageNum = slot.m_index / SlotGenerator::SLOTS_PER_PAGES;
-	const uint32 offset = slot.m_index % SlotGenerator::SLOTS_PER_PAGES;
+	const auto pageNum = slot.m_index / SlotGenerator::SLOTS_PER_PAGES;
+	const auto offset = slot.m_index % SlotGenerator::SLOTS_PER_PAGES;
 
 	return pageNum < m_redirection.size()
 		&& m_redirection[pageNum].m_memory
@@ -187,11 +190,11 @@ void SparseStorage<TData>::erase(SlotGenerator::Slot slot)
 {
 	AR_CRITICAL(has(slot), "Slot is not assigned to the storage");
 
-	const uint32 pageNum = slot.m_index / SlotGenerator::SLOTS_PER_PAGES;
-	const uint32 offset = slot.m_index % SlotGenerator::SLOTS_PER_PAGES;
+	const auto pageNum = slot.m_index / SlotGenerator::SLOTS_PER_PAGES;
+	const auto offset = slot.m_index % SlotGenerator::SLOTS_PER_PAGES;
 
 	SlotGenerator::Slot& internalSlot = m_redirection[pageNum].m_memory[offset];
-	const uint32 location = internalSlot.m_index;
+	const auto location = internalSlot.m_index;
 	++internalSlot.m_generation;
 	internalSlot.m_index = SlotGenerator::Slot::INVALID_INDEX;
 
@@ -203,8 +206,8 @@ template <typename TData>
 TData& SparseStorage<TData>::at(SlotGenerator::Slot slot)
 {
 	AR_CRITICAL(has(slot), "Slot is not assigned to the storage");
-	const uint32 pageNum = slot.m_index / SlotGenerator::SLOTS_PER_PAGES;
-	const uint32 offset = slot.m_index % SlotGenerator::SLOTS_PER_PAGES;
+	const auto pageNum = slot.m_index / SlotGenerator::SLOTS_PER_PAGES;
+	const auto offset = slot.m_index % SlotGenerator::SLOTS_PER_PAGES;
 
 	return m_storage[m_redirection[pageNum].m_memory[offset].m_index];
 }
@@ -213,8 +216,8 @@ template <typename TData>
 const TData& SparseStorage<TData>::at(SlotGenerator::Slot slot) const
 {
 	AR_CRITICAL(has(slot), "Slot is not assigned to the storage");
-	const uint32 pageNum = slot.m_index / SlotGenerator::SLOTS_PER_PAGES;
-	const uint32 offset = slot.m_index % SlotGenerator::SLOTS_PER_PAGES;
+	const auto pageNum = slot.m_index / SlotGenerator::SLOTS_PER_PAGES;
+	const auto offset = slot.m_index % SlotGenerator::SLOTS_PER_PAGES;
 
 	return m_storage[m_redirection[pageNum].m_memory[offset].m_index];
 }
