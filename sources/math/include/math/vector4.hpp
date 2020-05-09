@@ -5,7 +5,7 @@
 
 #include "simd.hpp"
 
-namespace Argon::Math
+namespace argon::math
 {
 class Vector3;
 
@@ -88,4 +88,4 @@ private:
 };
 
 Vector4 AR_VEC_CALL operator*(float32 scalar, const Vector4 &v);
-} // namespace Argon::Math
+} // namespace argon::math

@@ -6,7 +6,7 @@
 #include "simd.hpp"
 #include "vector3.hpp"
 
-namespace Argon::Math
+namespace argon::math
 {
 class Quaternion;
 
@@ -91,4 +91,4 @@ private:
 
 	Vector3 m_rows[3];
 };
-} // namespace Argon::Math
+} // namespace argon::math

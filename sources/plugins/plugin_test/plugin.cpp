@@ -9,7 +9,7 @@
 
 RTTR_PLUGIN_REGISTRATION
 {
-	Argon::Reflection::System<SimpleAppSystem>("SimpleAppSystem");
+	argon::reflection::System<SimpleAppSystem>("SimpleAppSystem");
 }
 
 void SimpleAppSystem::initialize()

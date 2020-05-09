@@ -1,6 +1,6 @@
 #include "entity.hpp"
 
-namespace Argon
+namespace argon
 {
 Entity::Entity()
 	: m_slot()
@@ -11,4 +11,4 @@ Entity::Entity(SlotGenerator::Slot slot)
 	: m_slot(std::move(slot))
 {
 }
-} // namespace Argon
+} // namespace argon

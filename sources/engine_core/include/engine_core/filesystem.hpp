@@ -7,7 +7,7 @@
 
 #include "service.hpp"
 
-namespace Argon
+namespace argon
 {
 class AR_SYM_EXPORT Filesystem final
 	: public Service<Filesystem>
@@ -30,4 +30,4 @@ private:
 	std::filesystem::path m_plugins;
 	std::filesystem::path m_basePath;
 };
-} // namespace Argon
+} // namespace argon

@@ -4,7 +4,7 @@
 #include "space.hpp"
 #include "system_manager.hpp"
 
-namespace Argon
+namespace argon
 {
 Space::Space()
 	: m_entityManager(new EntityManager)
@@ -20,4 +20,4 @@ void Space::tick()
 	m_systemManager->tick();
 	//Debug::statusMsg("Space tick end");
 }
-} // namespace Argon
+} // namespace argon

@@ -6,7 +6,7 @@
 
 #include "ecs_traits.hpp"
 
-namespace Argon
+namespace argon
 {
 template <typename TDerived>
 struct Service : NonCopyable
@@ -19,8 +19,8 @@ struct Service : NonCopyable
 		static_assert(!std::is_copy_constructible_v<TDerived>
 			&& !std::is_assignable_v<TDerived, TDerived>
 			&& !std::is_copy_assignable_v<TDerived>, "Service cannot be copyable");
-		static_assert(ECSTraits::HasInitializeMemberV<TDerived>, "Service must have initialize method");
-		static_assert(ECSTraits::HasFinalizeMemberV<TDerived>, "Service must have finalize method");
+		static_assert(ecstraits::HasInitializeMemberV<TDerived>, "Service must have initialize method");
+		static_assert(ecstraits::HasFinalizeMemberV<TDerived>, "Service must have finalize method");
 	}
 };
-} // namespace Argon
+} // namespace argon

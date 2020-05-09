@@ -2,7 +2,7 @@
 
 #include "sparse_storage.hpp"
 
-namespace Argon
+namespace argon
 {
 SlotGenerator::Slot::Slot()
 	: m_index(INVALID_INDEX)
@@ -65,4 +65,4 @@ void SlotGenerator::_allocatePage()
 		m_memPages[lastPageInd].m_memory[i].m_index = lastPageInd * SLOTS_PER_PAGES + i + 1;
 	}
 }
-} // namespace Argon
+} // namespace argon

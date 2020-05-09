@@ -14,7 +14,7 @@
 
 #include <fundamental/types.hpp>
 
-namespace Argon
+namespace argon
 {
 template <typename T, sizet N>
 using array = std::array<T, N>;
@@ -72,4 +72,4 @@ using unordered_multiset = std::unordered_multiset<Key, Hash, KeyEqual, Allocato
 template <typename Key, typename Hash = std::hash<Key>, typename KeyEqual = std::equal_to<Key>,
 																												typename Allocator = std::allocator<Key>>
 using unordered_set = std::unordered_set<Key, Hash, KeyEqual, Allocator>;
-} //namespace Argon
+} //namespace argon

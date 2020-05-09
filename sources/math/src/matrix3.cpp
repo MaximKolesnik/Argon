@@ -7,7 +7,7 @@
 #include "matrix3.hpp"
 #include "quaternion.hpp"
 
-namespace Argon::Math
+namespace argon::math
 {
 const Matrix3 AR_ATTR_ALIGN(16) Matrix3::c_identity(Vector3::c_xAxis, Vector3::c_yAxis,
 																										Vector3::c_zAxis);
@@ -566,4 +566,4 @@ float32 AR_VEC_CALL Matrix3::_cofactor(int32 r1, int32 c1, int32 r2, int32 c2) c
 {
 	return m_rows[r1][c1] * m_rows[r2][c2] - m_rows[r2][c1] * m_rows[r1][c2];
 }
-} // namespace Argon::Math
+} // namespace argon::math

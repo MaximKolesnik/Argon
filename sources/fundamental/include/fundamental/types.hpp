@@ -3,7 +3,7 @@
 #include <cstdint>
 #include <cstddef>
 
-namespace Argon
+namespace argon
 {
 using int8 = std::int8_t;
 using int16 = std::int16_t;
@@ -41,4 +41,4 @@ static_assert(sizeof(ptrdiff) == 8, "ptrdiff must be 64 bits");
 
 static_assert(sizeof(float32) == 4, "float32 must be 32 bits");
 static_assert(sizeof(float64) == 8, "float64 must be 64 bits");
-} // namespace Argon
+} // namespace argon

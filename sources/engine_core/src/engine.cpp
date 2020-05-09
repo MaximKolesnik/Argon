@@ -10,7 +10,7 @@
 #include "space.hpp"
 #include "time.hpp"
 
-namespace Argon
+namespace argon
 {
 namespace
 {
@@ -74,4 +74,4 @@ void Engine::exec()
 		m_space->tick();
 	}
 }
-} // namespace Argon
+} // namespace argon

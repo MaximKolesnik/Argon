@@ -6,7 +6,7 @@
 #include "quaternion.hpp"
 #include "utils.hpp"
 
-namespace Argon::Math
+namespace argon::math
 {
 Quaternion::Quaternion()
 {
@@ -331,7 +331,7 @@ void AR_VEC_CALL Quaternion::setEuler(float32 roll, float32 pitch, float32 yaw)
 	__m128 q1 = _mm_set1_ps(cz);
 	__m128 q2 = _mm_set1_ps(sz);
 
-	q2 = _mm_xor_ps(q2, _mm_castsi128_ps(Utils::c_SIMDNegMask));
+	q2 = _mm_xor_ps(q2, _mm_castsi128_ps(utils::c_SIMDNegMask));
 
 	__m128 s = _mm_set_ps(sy, cy, sy, cy);
 	q1 = _mm_mul_ps(q1, s);
@@ -691,8 +691,8 @@ Quaternion AR_VEC_CALL Quaternion::operator*(const Vector3 &v) const
 	q = _mm_mul_ps(q, mv);
 
 
-	result = _mm_xor_ps(result, _mm_castsi128_ps(Utils::c_SIMDNegMask));
-	q = _mm_xor_ps(q, Utils::c_SIMDNegMask);
+	result = _mm_xor_ps(result, _mm_castsi128_ps(utils::c_SIMDNegMask));
+	q = _mm_xor_ps(q, utils::c_SIMDNegMask);
 
 	return Quaternion( _mm_add_ps(result, q));
 #else
@@ -766,4 +766,4 @@ const float32& AR_VEC_CALL Quaternion::operator[](int32 i) const
 	AR_ASSERT_MSG(i >= 0 && i < 4, "Index is out of range");
 	return m_comps[i];
 }
-} // namespace Argon::Math
+} // namespace argon::math

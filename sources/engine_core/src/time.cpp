@@ -5,7 +5,7 @@
 
 #include "time.hpp"
 
-namespace Argon
+namespace argon
 {
 class Time::TimePrivate final
 {
@@ -96,4 +96,4 @@ void Time::endFrame()
 {
 	m_impl->endFrame();
 }
-} // namespace Argon
+} // namespace argon

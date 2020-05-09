@@ -6,13 +6,13 @@
 #include "matrix4.hpp"
 #include "quaternion.hpp"
 
-namespace Argon::Math
+namespace argon::math
 {
 const Matrix4 AR_ATTR_ALIGN(16) Matrix4::c_identity(
-			1.f, 0.f, 0.f, 0.f,
-			0.f, 1.f, 0.f, 0.f,
-			0.f, 0.f, 1.f, 0.f,
-			0.f, 0.f, 0.f, 1.f);
+	1.f, 0.f, 0.f, 0.f,
+	0.f, 1.f, 0.f, 0.f,
+	0.f, 0.f, 1.f, 0.f,
+	0.f, 0.f, 0.f, 1.f);
 
 Matrix4::Matrix4()
 {
@@ -1348,4 +1348,4 @@ Vector4 AR_VEC_CALL Matrix4::_getColumn4(int32 i) const
 	AR_ASSERT_MSG(0 <= i && i < 4, "Index is out of range");
 	return Vector4(m_rows[0][i], m_rows[1][i], m_rows[2][i], m_rows[3][i]);
 }
-} // namespace Argon::Math
+} // namespace argon::math

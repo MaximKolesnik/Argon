@@ -2,7 +2,7 @@
 
 #include "compiler_macros.hpp"
 
-namespace Argon
+namespace argon
 {
 #define AR_PRIVATE_IMPL(className) \
 	class className##Private; \
@@ -13,4 +13,4 @@ namespace Argon
 
 #define AR_PAD(bytes) \
 	AR_ATTR_UNUSED byte _pad[bytes]
-} // namespace Argon
+} // namespace argon

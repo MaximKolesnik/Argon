@@ -10,9 +10,7 @@
 #define AR_ASSERT_MSG(EXPR, MSG) assert(EXPR)
 #define AR_CRITICAL(EXPR, MSG) AR_ASSERT_MSG(EXPR, MSG)
 
-namespace Argon
-{
-namespace Debug
+namespace argon::debug
 {
 template <typename ...Args>
 void errorMsg(Args &&...args)
@@ -31,5 +29,4 @@ void statusMsg(Args &&...args)
 	std::cerr << "STATUS MSG: ";
 	(std::cerr << ... << args) << std::endl;
 }
-} // namespace Debug
-} // namespace Argon
+} // namespace argon::debug

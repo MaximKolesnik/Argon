@@ -7,7 +7,7 @@
 #include "utils.hpp"
 #include "vector3.hpp"
 
-namespace Argon::Math::Utils
+namespace argon::math::utils
 {
 float32 round(float32 val, uint16 numDecimals)
 {
@@ -42,4 +42,4 @@ void gramSchmidt(Vector3 &e1, Vector3 &e2, Vector3 &e3)
 	AR_ASSERT_MSG(e1.dot(e2) == 0.f, "Basis is not orthogonal");
 	AR_ASSERT_MSG(e1.dot(e3) == 0.f, "Basis is not orthogonal");
 }
-} // namespace Argon::Math::Utils
+} // namespace argon::math::utils

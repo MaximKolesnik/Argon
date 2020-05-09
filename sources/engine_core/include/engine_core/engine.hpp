@@ -16,7 +16,7 @@
 
 // TODO remove Engine singleton asap!
 
-namespace Argon
+namespace argon
 {
 class PluginManager;
 class Space;
@@ -55,4 +55,4 @@ TService& Engine::get() const
 		"Service must be derived from service template");
 	return *m_services.at(rttr::type::get<TService>()).template get_value<TService*>();
 }
-} // namespace Argon
+} // namespace argon

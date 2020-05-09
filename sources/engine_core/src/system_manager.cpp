@@ -3,7 +3,7 @@
 #include "system_manager.hpp"
 #include "system.hpp"
 
-namespace Argon
+namespace argon
 {
 SystemManager::SystemManager()
 {
@@ -33,4 +33,4 @@ void SystemManager::tick()
 		s.first.get_method("tick").invoke(s.second);
 	}
 }
-} // namespace Argon
+} // namespace argon

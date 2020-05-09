@@ -4,7 +4,7 @@
 
 #include <render/simple_app.hpp>
 
-class SimpleAppSystem : public Argon::System<SimpleAppSystem>
+class SimpleAppSystem : public argon::System<SimpleAppSystem>
 {
 public:
 	void initialize();
@@ -13,5 +13,5 @@ public:
 	void tick();
 
 private:
-	Argon::SimpleApp app;
+	argon::SimpleApp app;
 };

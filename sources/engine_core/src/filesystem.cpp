@@ -8,10 +8,10 @@
 
 RTTR_REGISTRATION
 {
-	Argon::Reflection::Service<Argon::Filesystem>("Filesystem");
+	argon::reflection::Service<argon::Filesystem>("Filesystem");
 }
 
-namespace Argon
+namespace argon
 {
 void Filesystem::initialize()
 {
@@ -46,4 +46,4 @@ void Filesystem::privateConstruct(const std::string &basePath)
 {
 	m_basePath = basePath;
 }
-} // namespace Argon
+} // namespace argon

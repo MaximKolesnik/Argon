@@ -16,7 +16,7 @@
 
 #include <fundamental/non_copyable.hpp>
 
-namespace Argon
+namespace argon
 {
 class SystemManager
 	: NonCopyable
@@ -30,4 +30,4 @@ public:
 private:
 	unordered_map<rttr::type, rttr::variant> m_systems;
 };
-} // namespace Argon
+} // namespace argon

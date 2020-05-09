@@ -2,7 +2,7 @@
 
 #include <fundamental/compiler_macros.hpp>
 
-namespace Argon
+namespace argon
 {
 class AR_SYM_EXPORT SimpleApp
 {

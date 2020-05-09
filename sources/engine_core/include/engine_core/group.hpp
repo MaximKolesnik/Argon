@@ -1,5 +1,5 @@
 #pragma once
 
-namespace Argon
+namespace argon
 {
-} // namespace Argon
+} // namespace argon

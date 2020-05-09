@@ -7,7 +7,7 @@
 #include "vector3.hpp"
 #include "vector4.hpp"
 
-namespace Argon::Math
+namespace argon::math
 {
 class Quaternion;
 
@@ -115,4 +115,4 @@ private:
 
 	Vector4 m_rows[4];
 };
-} // namespace Argon::Math
+} // namespace argon::math

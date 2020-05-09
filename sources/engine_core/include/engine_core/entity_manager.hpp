@@ -6,7 +6,7 @@
 
 #include "entity.hpp"
 
-namespace Argon
+namespace argon
 {
 class SlotGenerator;
 
@@ -23,4 +23,4 @@ public:
 private:
 	std::unique_ptr<SlotGenerator> m_entitySlotGenerator;
 };
-} // namespace Argon
+} // namespace argon

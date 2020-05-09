@@ -6,7 +6,7 @@
 #include "filesystem.hpp"
 #include "private/plugin/plugin_manager.hpp"
 
-namespace Argon
+namespace argon
 {
 PluginManager::PluginManager() = default;
 
@@ -31,12 +31,12 @@ void PluginManager::initialize()
 		auto plugin = std::make_unique<rttr::library>(pluginPath);
 		if (!plugin->load())
 		{
-			Debug::errorMsg("Failed to load plugin: ", filename, ". Error: ",
+			debug::errorMsg("Failed to load plugin: ", filename, ". Error: ",
 				plugin->get_error_string());
 			continue;
 		}
 
-		Debug::statusMsg("Plugin loaded ", filename);
+		debug::statusMsg("Plugin loaded ", filename);
 		m_plugins.emplace(filename, std::move(plugin));
 	}
 }
@@ -47,9 +47,9 @@ void PluginManager::finalize()
 	{
 		p->unload();
 		p.reset();
-		Debug::statusMsg("Plugin unloaded ", f);
+		debug::statusMsg("Plugin unloaded ", f);
 	}
 
 	m_plugins.clear();
 }
-} // namespace Argon
+} // namespace argon

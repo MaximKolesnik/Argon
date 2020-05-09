@@ -1,7 +1,7 @@
 #pragma once
 
-namespace Argon
+namespace argon
 {
 class Core;
 class CoreSingleton;
-} // namespace Argon
+} // namespace argon

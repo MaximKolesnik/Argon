@@ -1,6 +1,6 @@
 #pragma once
 
-namespace Argon
+namespace argon
 {
 class NonCopyable
 {
@@ -12,4 +12,4 @@ protected:
 	NonCopyable() = default;
 	~NonCopyable() = default;
 };
-} // Argon
+} // namespace argon

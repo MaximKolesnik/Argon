@@ -2,7 +2,7 @@
 
 #include <data_structures/sparse_storage.hpp>
 
-namespace Argon
+namespace argon
 {
 class Entity final
 {
@@ -19,4 +19,4 @@ private:
 
 	SlotGenerator::Slot m_slot;
 };
-} // namespace Argon
+} // namespace argon

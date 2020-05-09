@@ -8,7 +8,7 @@
 #include "simd.hpp"
 #include "vector3.hpp"
 
-namespace Argon::Math
+namespace argon::math
 {
 AR_ATTR_ALIGN(16) class Quaternion final
 {
@@ -85,4 +85,4 @@ private:
 	float32 m_comps[4];
 #endif // ifdef AR_SIMD
 };
-} // namespace Argon::Math
+} // namespace argon::math

@@ -6,7 +6,7 @@
 #include <fundamental/helper_macros.hpp>
 #include <fundamental/types.hpp>
 
-namespace Argon
+namespace argon
 {
 class AR_SYM_EXPORT Time final
 {
@@ -25,4 +25,4 @@ public:
 private:
 	AR_PRIVATE_IMPL(Time);
 };
-} // namespace Argon
+} // namespace argon

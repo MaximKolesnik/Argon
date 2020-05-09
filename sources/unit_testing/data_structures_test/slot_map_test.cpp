@@ -5,8 +5,8 @@
 
 TEST(SlotMap, DefaultConstructedHandle) 
 {
-	Argon::SlotMap<int> slotMap;
-	Argon::SlotMap<int>::Slot slot;
+	argon::SlotMap<int> slotMap;
+	argon::SlotMap<int>::Slot slot;
 
 	EXPECT_FALSE(slotMap.isSlotValid(slot))
 		<< "Slot is valid, although it was created in invalid state";
@@ -24,7 +24,7 @@ TEST(SlotMap, DefaultConstructedHandle)
 
 TEST(SlotMap, SimpleCreation)
 {
-	Argon::SlotMap<int> slotMap;
+	argon::SlotMap<int> slotMap;
 
 	const auto newSlot = slotMap.allocate(10);
 	EXPECT_TRUE(slotMap.isSlotValid(newSlot))
@@ -40,10 +40,10 @@ TEST(SlotMap, SimpleCreation)
 
 TEST(SlotMap, AllocationSmall)
 {
-	Argon::SlotMap<Argon::sizet> slotMap;
-	Argon::vector<Argon::SlotMap<Argon::sizet>::Slot> slots;
+	argon::SlotMap<argon::sizet> slotMap;
+	argon::vector<argon::SlotMap<argon::sizet>::Slot> slots;
 
-	for (Argon::sizet i = 0; i < 500; ++i)
+	for (argon::sizet i = 0; i < 500; ++i)
 	{
 		auto slot = slotMap.allocate(i);
 		EXPECT_TRUE(slotMap.isSlotValid(slot));
@@ -53,7 +53,7 @@ TEST(SlotMap, AllocationSmall)
 		slots.push_back(slot);
 	}
 
-	for (Argon::sizet i = 0; i < 500; ++i)
+	for (argon::sizet i = 0; i < 500; ++i)
 	{
 		EXPECT_TRUE(slotMap.isSlotValid(slots[i]));
 		EXPECT_EQ(i, slotMap.at(slots[i]));
@@ -62,10 +62,10 @@ TEST(SlotMap, AllocationSmall)
 
 TEST(SlotMap, AllocationBig)
 {
-	Argon::SlotMap<Argon::sizet> slotMap;
-	Argon::vector<Argon::SlotMap<Argon::sizet>::Slot> slots;
+	argon::SlotMap<argon::sizet> slotMap;
+	argon::vector<argon::SlotMap<argon::sizet>::Slot> slots;
 
-	for (Argon::sizet i = 0; i < 100000; ++i)
+	for (argon::sizet i = 0; i < 100000; ++i)
 	{
 		auto slot = slotMap.allocate(i);
 		EXPECT_TRUE(slotMap.isSlotValid(slot));
@@ -75,7 +75,7 @@ TEST(SlotMap, AllocationBig)
 		slots.push_back(slot);
 	}
 
-	for (Argon::sizet i = 0; i < 100000; ++i)
+	for (argon::sizet i = 0; i < 100000; ++i)
 	{
 		EXPECT_TRUE(slotMap.isSlotValid(slots[i]));
 		EXPECT_EQ(i, slotMap.at(slots[i]));
@@ -84,7 +84,7 @@ TEST(SlotMap, AllocationBig)
 
 TEST(SlotMap, GenerationTest)
 {
-	Argon::SlotMap<Argon::uint32> slotMap;
+	argon::SlotMap<argon::uint32> slotMap;
 
 	auto newSlot = slotMap.allocate(10u);
 	EXPECT_EQ(newSlot.getGeneration(), 0u);
@@ -100,7 +100,7 @@ TEST(SlotMap, GenerationTest)
 
 TEST(SlotMap, SmallRemap)
 {
-	Argon::SlotMap<Argon::uint32> slotMap;
+	argon::SlotMap<argon::uint32> slotMap;
 
 	auto slot0 = slotMap.allocate(0u);
 	auto slot1 = slotMap.allocate(1u);
@@ -143,17 +143,17 @@ TEST(SlotMap, SmallRemap)
 
 TEST(SlotMap, BigRemap)
 {
-	Argon::SlotMap<Argon::sizet> slotMap;
-	Argon::vector<Argon::SlotMap<Argon::sizet>::Slot> slots;
-	Argon::vector<Argon::sizet> vals;
+	argon::SlotMap<argon::sizet> slotMap;
+	argon::vector<argon::SlotMap<argon::sizet>::Slot> slots;
+	argon::vector<argon::sizet> vals;
 
-	for (Argon::sizet i = 0; i < slotMap.s_numObjectPerPage * 10; ++i)
+	for (argon::sizet i = 0; i < slotMap.s_numObjectPerPage * 10; ++i)
 	{
 		slots.emplace_back(slotMap.allocate(i));
 		vals.emplace_back(i);
 	}
 
-	for (Argon::sizet i = 0; i < slotMap.s_numObjectPerPage * 10; ++i)
+	for (argon::sizet i = 0; i < slotMap.s_numObjectPerPage * 10; ++i)
 	{
 		EXPECT_TRUE(slotMap.isSlotValid(slots[i]));
 		EXPECT_EQ(slotMap.at(slots[i]), vals[i]);
@@ -163,25 +163,25 @@ TEST(SlotMap, BigRemap)
 	{
 		if (i % 3 == 0)
 		{
-			slotMap.erase(slots[static_cast<Argon::sizet>(i)]);
+			slotMap.erase(slots[static_cast<argon::sizet>(i)]);
 			slots.erase(slots.begin() + i);
 			vals.erase(vals.begin() + i);
 		}
 	}
 
-	for (Argon::sizet i = 0; i < slots.size(); ++i)
+	for (argon::sizet i = 0; i < slots.size(); ++i)
 	{
 		EXPECT_TRUE(slotMap.isSlotValid(slots[i]));
 		EXPECT_EQ(slotMap.at(slots[i]), vals[i]);
 	}
 
-	for (Argon::sizet i = 0; i < slotMap.s_numObjectPerPage * 5; ++i)
+	for (argon::sizet i = 0; i < slotMap.s_numObjectPerPage * 5; ++i)
 	{
 		slots.emplace_back(slotMap.allocate(10000u + i));
 		vals.emplace_back(10000u + i);
 	}
 
-	for (Argon::sizet i = 0; i < slots.size(); ++i)
+	for (argon::sizet i = 0; i < slots.size(); ++i)
 	{
 		EXPECT_TRUE(slotMap.isSlotValid(slots[i]));
 		EXPECT_EQ(slotMap.at(slots[i]), vals[i]);
@@ -190,24 +190,24 @@ TEST(SlotMap, BigRemap)
 
 TEST(SlotMap, Iterators)
 {
-	Argon::SlotMap<Argon::sizet> slotMap;
-	Argon::vector<Argon::SlotMap<Argon::sizet>::Slot> slots;
-	Argon::vector<Argon::sizet> vals;
+	argon::SlotMap<argon::sizet> slotMap;
+	argon::vector<argon::SlotMap<argon::sizet>::Slot> slots;
+	argon::vector<argon::sizet> vals;
 
-	for (Argon::sizet i = 0; i < slotMap.s_numObjectPerPage * 10; ++i)
+	for (argon::sizet i = 0; i < slotMap.s_numObjectPerPage * 10; ++i)
 	{
 		slots.emplace_back(slotMap.allocate(i));
 		vals.emplace_back(i);
 	}
 
-	for (Argon::sizet i = 0; i < slotMap.s_numObjectPerPage * 10; ++i)
+	for (argon::sizet i = 0; i < slotMap.s_numObjectPerPage * 10; ++i)
 	{
 		EXPECT_TRUE(slotMap.isSlotValid(slots[i]));
 		EXPECT_EQ(slotMap.at(slots[i]), vals[i]);
 	}
 
 	{
-		Argon::sizet i = 0;
+		argon::sizet i = 0;
 		for (const auto& v : slotMap)
 		{
 			EXPECT_EQ(v, vals[i]);

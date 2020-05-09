@@ -5,7 +5,7 @@
 
 #define BUFFER_OFFSET(a) (reinterpret_cast<void*>(a))
 
-namespace Argon
+namespace argon
 {
 enum VAO_IDs { Triangles, NumVAOs };
 enum Buffer_IDs { ArrayBuffer, NumBuffers };
@@ -48,7 +48,7 @@ void SimpleApp::prepare()
 	glBindBuffer( GL_ARRAY_BUFFER, Buffers[ArrayBuffer] );
 	glBufferData( GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-	Render::ShaderInfo  shaders[] =
+	render::ShaderInfo  shaders[] =
 	{
 		{ GL_VERTEX_SHADER, 0, "shaders/gouraud/gouraud.vert" },
 		{ GL_FRAGMENT_SHADER, 0, "shaders/gouraud/gouraud.frag" },
@@ -83,7 +83,7 @@ void SimpleApp::tick()
 
 	if (shouldClose())
 	{
-		Argon::Engine::instance().shutdown();
+		argon::Engine::instance().shutdown();
 	}
 }
 

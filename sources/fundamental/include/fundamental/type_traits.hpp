@@ -2,6 +2,6 @@
 
 #include <type_traits>
 
-namespace Argon::TypeTraits
+namespace argon::typetraits
 {
-} // Argon::TypeTraits
+} // argon::typetraits

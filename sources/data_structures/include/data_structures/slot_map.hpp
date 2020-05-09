@@ -12,7 +12,7 @@
 
 #include "standard_containers.hpp"
 
-namespace Argon
+namespace argon
 {
 template <typename ObjType, uint32 NUM_OBJECTS_PER_PAGE = 64>
 class SlotMap final
@@ -408,4 +408,4 @@ uint32 SlotMap<ObjType, NUM_OBJECTS_PER_PAGE>::_getPageOffset(uint32 val) const
 {
 	return m_redirect[val].m_index % NUM_OBJECTS_PER_PAGE;
 }
-} // namespace Argon
+} // namespace argon

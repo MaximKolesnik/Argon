@@ -5,11 +5,11 @@
 
 #include "simd.hpp"
 
-namespace Argon::Math
+namespace argon::math
 {
 class Vector3;
 
-namespace Utils
+namespace utils
 {
 #ifdef AR_SIMD
 const __m128 c_SIMDZeroMask = _mm_set_ps(-0.f, -0.f, -0.f, -0.f);
@@ -32,5 +32,5 @@ T getSign(const T& val)
 float32 round(float32 val, uint16 numDecimals);
 
 void gramSchmidt(Vector3 &e1, Vector3 &e2, Vector3 &e3);
-} // namespace Utils
-} // namespace Argon::Math
+} // namespace utils
+} // namespace argon::math

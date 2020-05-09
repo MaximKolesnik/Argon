@@ -4,7 +4,7 @@
 
 #include <fundamental/types.hpp>
 
-namespace Argon::ECSTraits
+namespace argon::ecstraits
 {
 template <typename, typename = void>
 struct HasInitializeMember
@@ -56,4 +56,4 @@ struct HasTickMember<T, std::void_t<decltype(&T::tick)>>
 
 template <typename T>
 inline constexpr bool HasTickMemberV = HasTickMember<T>::value;
-} // namespace Argon::ECSTraits
+} // namespace argon::ecstraits

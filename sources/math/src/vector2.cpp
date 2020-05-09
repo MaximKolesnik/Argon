@@ -8,7 +8,7 @@
 #include "utils.hpp"
 #include "vector2.hpp"
 
-namespace Argon::Math
+namespace argon::math
 {
 const Vector2 AR_ATTR_ALIGN(16) Vector2::c_zero = Vector2(0.f, 0.f);
 const Vector2 AR_ATTR_ALIGN(16) Vector2::c_xAxis = Vector2(1.f, 0.f);
@@ -120,7 +120,7 @@ bool Vector2::isZeroEpsilon(void) const
 bool Vector2::hasInfinity(void) const
 {
 #ifdef AR_SIMD
-	__m128 test = _mm_andnot_ps(Utils::c_SIMDZeroMask, m_data);
+	__m128 test = _mm_andnot_ps(utils::c_SIMDZeroMask, m_data);
 	const __m128 inf = _mm_set1_ps(std::numeric_limits<float32>::infinity());
 
 	test = _mm_cmp_ps(test, inf, _CMP_EQ_OQ);
@@ -136,7 +136,7 @@ bool Vector2::hasInfinity(void) const
 Vector2 AR_VEC_CALL  Vector2::getAbs(void) const
 {
 #ifdef AR_SIMD
-	return Vector2(_mm_and_ps(m_data, Utils::c_SIMDAbsMask));
+	return Vector2(_mm_and_ps(m_data, utils::c_SIMDAbsMask));
 #else
 	return Vector2(std::abs(m_comps[0]), std::abs(m_comps[1]));
 #endif // ifdef AR_SIMD
@@ -145,7 +145,7 @@ Vector2 AR_VEC_CALL  Vector2::getAbs(void) const
 Vector2& AR_VEC_CALL Vector2::abs(void)
 {
 #ifdef AR_SIMD
-	m_data = _mm_and_ps(m_data, Utils::c_SIMDAbsMask);
+	m_data = _mm_and_ps(m_data, utils::c_SIMDAbsMask);
 #else
 	m_comps[0] = std::abs(m_comps[0]);
 	m_comps[1] = std::abs(m_comps[1]);
@@ -157,7 +157,7 @@ Vector2& AR_VEC_CALL Vector2::abs(void)
 Vector2 AR_VEC_CALL Vector2::getNegated(void) const
 {
 #ifdef AR_SIMD
-	return Vector2(_mm_xor_ps(m_data, Utils::c_SIMDNegMask));
+	return Vector2(_mm_xor_ps(m_data, utils::c_SIMDNegMask));
 #else
 	return Vector2(-m_comps[0], -m_comps[1]);
 #endif // ifdef AR_SIMD
@@ -166,7 +166,7 @@ Vector2 AR_VEC_CALL Vector2::getNegated(void) const
 Vector2& AR_VEC_CALL Vector2::negate(void)
 {
 #ifdef AR_SIMD
-	m_data = _mm_xor_ps(m_data, Utils::c_SIMDNegMask);
+	m_data = _mm_xor_ps(m_data, utils::c_SIMDNegMask);
 #else
 	m_comps[0] = -m_comps[0];
 	m_comps[1] = -m_comps[1];
@@ -316,7 +316,7 @@ Vector2& AR_VEC_CALL Vector2::operator+=(const Vector2 &other)
 Vector2 AR_VEC_CALL Vector2::operator-(void) const
 {
 #ifdef AR_SIMD
-	return Vector2(_mm_xor_ps(m_data, Utils::c_SIMDNegMask));
+	return Vector2(_mm_xor_ps(m_data, utils::c_SIMDNegMask));
 #else
 	return Vector2(-m_comps[0], -m_comps[1]);
 #endif // ifdef AR_SIMD
@@ -419,4 +419,4 @@ Vector2 AR_VEC_CALL operator*(float32 s, const Vector2 &v)
 {
 	return v * s;
 }
-} // namespace Argon::Math
+} // namespace argon::math

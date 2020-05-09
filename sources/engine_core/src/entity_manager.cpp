@@ -3,7 +3,7 @@
 #include "entity_manager.hpp"
 #include "reflection.hpp"
 
-namespace Argon
+namespace argon
 {
 EntityManager::EntityManager()
 	: m_entitySlotGenerator(new SlotGenerator)
@@ -21,4 +21,4 @@ bool EntityManager::isValid(const Entity& e) const
 {
 	return m_entitySlotGenerator->isValid(e.m_slot);
 }
-} // namespace Argon
+} // namespace argon

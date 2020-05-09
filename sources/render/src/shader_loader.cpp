@@ -4,9 +4,7 @@
 
 #include "shader_loader.hpp"
 
-namespace Argon
-{
-namespace Render
+namespace argon::render
 {
 namespace
 {
@@ -17,7 +15,7 @@ const GLchar* ReadShader(const char *filename)
 
 	if (!shaderFile.is_open())
 	{
-		Debug::errorMsg("Shader file ", filename, " cannot be opened");
+		debug::errorMsg("Shader file ", filename, " cannot be opened");
 		return nullptr;
 	}
 
@@ -75,7 +73,7 @@ GLuint LoadShaders(ShaderInfo *info)
 
 			GLchar *log = new GLchar[static_cast<size_t>(len + 1)];
 			glGetShaderInfoLog(shader, len, &len, log);
-			Debug::errorMsg("Shader compilation failed: ", log);
+			debug::errorMsg("Shader compilation failed: ", log);
 
 			delete []log;
 			return 0;
@@ -97,7 +95,7 @@ GLuint LoadShaders(ShaderInfo *info)
 
 		GLchar *log = new GLchar[static_cast<size_t>(len + 1)];
 		glGetProgramInfoLog(program, len, &len, log);
-		Debug::errorMsg("Shader linking failed: ", log);
+		debug::errorMsg("Shader linking failed: ", log);
 		delete []log;
 
 		for (entry = info; entry->m_type != GL_NONE; ++entry)
@@ -111,5 +109,4 @@ GLuint LoadShaders(ShaderInfo *info)
 
 	return program;
 }
-} // namespace Render
-} // namespace Argon
+} // namespace argon::render

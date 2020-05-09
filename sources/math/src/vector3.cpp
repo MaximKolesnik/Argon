@@ -8,7 +8,7 @@
 #include "utils.hpp"
 #include "vector3.hpp"
 
-namespace Argon::Math
+namespace argon::math
 {
 const Vector3 AR_ATTR_ALIGN(16) Vector3::c_zero = Vector3(0.f, 0.f, 0.f);
 const Vector3 AR_ATTR_ALIGN(16) Vector3::c_xAxis = Vector3(1.f, 0.f, 0.f);
@@ -172,7 +172,7 @@ bool Vector3::isZeroEpsilon() const
 bool Vector3::hasInfinity() const
 {
 #ifdef AR_SIMD
-	__m128 test = _mm_andnot_ps(Utils::c_SIMDZeroMask, m_data);
+	__m128 test = _mm_andnot_ps(utils::c_SIMDZeroMask, m_data);
 	const __m128 inf = _mm_set1_ps(std::numeric_limits<float32>::infinity());
 
 	test = _mm_cmp_ps(test, inf, _CMP_EQ_OQ);
@@ -188,7 +188,7 @@ bool Vector3::hasInfinity() const
 Vector3 AR_VEC_CALL Vector3::getAbs(void) const
 {
 #ifdef AR_SIMD
-	return Vector3(_mm_and_ps(m_data, Utils::c_SIMDAbsMask));
+	return Vector3(_mm_and_ps(m_data, utils::c_SIMDAbsMask));
 #else
 	return Vector3(std::abs(m_comps[0]), std::abs(m_comps[1]), std::abs(m_comps[2]));
 #endif // ifdef AR_SIMD
@@ -197,7 +197,7 @@ Vector3 AR_VEC_CALL Vector3::getAbs(void) const
 Vector3& AR_VEC_CALL Vector3::abs(void)
 {
 #ifdef AR_SIMD
-	m_data = _mm_and_ps(m_data, Utils::c_SIMDAbsMask);
+	m_data = _mm_and_ps(m_data, utils::c_SIMDAbsMask);
 #else
 	m_comps[0] = std::abs(m_comps[0]);
 	m_comps[1] = std::abs(m_comps[1]);
@@ -210,7 +210,7 @@ Vector3& AR_VEC_CALL Vector3::abs(void)
 Vector3 AR_VEC_CALL Vector3::getNegated(void) const
 {
 #ifdef AR_SIMD
-	return Vector3(_mm_xor_ps(m_data, Utils::c_SIMDNegMask));
+	return Vector3(_mm_xor_ps(m_data, utils::c_SIMDNegMask));
 #else
 	return Vector3(-m_comps[0], -m_comps[1], -m_comps[2]);
 #endif // ifdef AR_SIMD
@@ -220,7 +220,7 @@ Vector3 AR_VEC_CALL Vector3::getNegated(void) const
 Vector3& AR_VEC_CALL Vector3::negate(void)
 {
 #ifdef AR_SIMD
-	m_data = _mm_xor_ps(m_data, Utils::c_SIMDNegMask);
+	m_data = _mm_xor_ps(m_data, utils::c_SIMDNegMask);
 #else
 	m_comps[0] = -m_comps[0];
 	m_comps[1] = -m_comps[1];
@@ -389,7 +389,7 @@ Vector3& AR_VEC_CALL Vector3::operator+=(const Vector3 &other)
 Vector3 AR_VEC_CALL Vector3::operator-() const
 {
 #ifdef AR_SIMD
-	return Vector3(_mm_xor_ps(m_data, Utils::c_SIMDNegMask));
+	return Vector3(_mm_xor_ps(m_data, utils::c_SIMDNegMask));
 #else
 	return Vector3(-m_comps[0], -m_comps[1], -m_comps[2]);
 #endif // ifdef AR_SIMD
@@ -517,18 +517,18 @@ bool AR_VEC_CALL Vector3::operator!=(const Vector3 &other) const
 
 void AR_VEC_CALL Vector3::round(uint16 numDecimals)
 {
-	m_comps[0] = Utils::round(m_comps[0], numDecimals);
-	m_comps[1] = Utils::round(m_comps[1], numDecimals);
-	m_comps[2] = Utils::round(m_comps[2], numDecimals);
+	m_comps[0] = utils::round(m_comps[0], numDecimals);
+	m_comps[1] = utils::round(m_comps[1], numDecimals);
+	m_comps[2] = utils::round(m_comps[2], numDecimals);
 }
 
 Vector3 AR_VEC_CALL Vector3::getRounded(uint16 numDecimals) const
 {
 	Vector3 rVec;
 
-	rVec[0] = Utils::round(m_comps[0], numDecimals);
-	rVec[1] = Utils::round(m_comps[1], numDecimals);
-	rVec[2] = Utils::round(m_comps[2], numDecimals);
+	rVec[0] = utils::round(m_comps[0], numDecimals);
+	rVec[1] = utils::round(m_comps[1], numDecimals);
+	rVec[2] = utils::round(m_comps[2], numDecimals);
 
 	return rVec;
 }
@@ -542,4 +542,4 @@ Vector3 AR_VEC_CALL operator*(float32 scalar, const Vector3 &v)
 		v.getZ() * scalar);
 #endif // ifdef AR_SIMD
 }
-} // namespace Argon::Math
+} // namespace argon::math

@@ -7,7 +7,7 @@
 #include "vector3.hpp"
 #include "vector4.hpp"
 
-namespace Argon::Math
+namespace argon::math
 {
 const Vector4 AR_ATTR_ALIGN(16) Vector4::c_zero(0.0, 0.0, 0.0, 0.0);
 const Vector4 AR_ATTR_ALIGN(16) Vector4::c_xAxis(1.0, 0.0, 0.0, 0.0);
@@ -229,7 +229,7 @@ Vector4& AR_VEC_CALL Vector4::operator+=(const Vector4 &other)
 Vector4 AR_VEC_CALL Vector4::operator-(void) const
 {
 #ifdef AR_SIMD
-	return Vector4(_mm_xor_ps(m_data, Utils::c_SIMDNegMask));
+	return Vector4(_mm_xor_ps(m_data, utils::c_SIMDNegMask));
 #else
 	return Vector4(-m_comps[0], -m_comps[1], -m_comps[2], -m_comps[3]);
 #endif // ifdef AR_SIMD
@@ -345,4 +345,4 @@ Vector4 AR_VEC_CALL operator*(float32 scalar, const Vector4 &v)
 		v.getZ() * scalar, v.getZ() * scalar);
 #endif // ifdef AR_SIMD
 }
-} // namespace Argon
+} // namespace argon::math

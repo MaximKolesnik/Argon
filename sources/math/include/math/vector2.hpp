@@ -5,7 +5,7 @@
 
 #include "simd.hpp"
 
-namespace Argon::Math
+namespace argon::math
 {
 AR_ATTR_ALIGN(16) class Vector2 final
 {
@@ -109,4 +109,4 @@ private:
 };
 
 Vector2 AR_VEC_CALL operator*(float32 s, const Vector2 &v);
-} // namespace Argon::Math
+} // namespace argon::math

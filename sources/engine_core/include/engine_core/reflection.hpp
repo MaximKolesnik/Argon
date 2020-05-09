@@ -11,15 +11,15 @@
 #include <fundamental/helper_macros.hpp>
 #include <fundamental/types.hpp>
 
-namespace Argon
+namespace argon
 {
 template <typename> struct System;
 template <typename> struct Service;
-} // namespace Argon
+} // namespace argon
 
-namespace Argon::Reflection
+namespace argon::reflection
 {
-namespace Detail
+namespace detail
 {
 static constexpr uint64 C_META_REGISTERED = std::numeric_limits<uint64>::max();
 
@@ -42,7 +42,7 @@ public:
 protected:
 	std::unique_ptr<rttr::registration::class_<T>> m_class;
 };
-} // namespace Detail
+} // namespace detail
 
 inline constexpr const char* C_META_CLASS_TYPE = "ClassType";
 
@@ -70,7 +70,7 @@ enum class SystemMeta : uint32
 
 template <typename T>
 class Component final
-	: Detail::Object<T>
+	: detail::Object<T>
 {
 public:
 	Component(const char *name);
@@ -78,7 +78,7 @@ public:
 
 template <typename T>
 class Service final
-	: Detail::Object<T>
+	: detail::Object<T>
 {
 public:
 	Service(const char *name);
@@ -86,7 +86,7 @@ public:
 
 template <typename T>
 class System final
-	: Detail::Object<T>
+	: detail::Object<T>
 {
 public:
 	System(const char *name);
@@ -94,12 +94,12 @@ public:
 
 template <typename T>
 Component<T>::Component(const char *name)
-	: Detail::Object<T>(name)
+	: detail::Object<T>(name)
 {
 	static_assert(std::is_copy_assignable_v<T> && std::is_copy_constructible_v<T>,
 			"Component must be copyable");
 
-	Debug::statusMsg("Component ", name, " registered");
+	debug::statusMsg("Component ", name, " registered");
 	this->m_class->template constructor<>()
 		(rttr::policy::ctor::as_raw_ptr)
 		(rttr::metadata(ComponentMeta::Type, ClassType::Component));
@@ -107,12 +107,12 @@ Component<T>::Component(const char *name)
 
 template <typename T>
 Service<T>::Service(const char *name)
-	: Detail::Object<T>(name)
+	: detail::Object<T>(name)
 {
-	static_assert(std::is_base_of_v<Argon::Service<T>, T>,
+	static_assert(std::is_base_of_v<argon::Service<T>, T>,
 		"Service must be derived from service template");
 
-	Debug::statusMsg("Service ", name, " registered");
+	debug::statusMsg("Service ", name, " registered");
 	this->m_class->template constructor<>()
 		(rttr::policy::ctor::as_raw_ptr)
 		(rttr::metadata(ServiceMeta::Type, ClassType::Service))
@@ -122,12 +122,12 @@ Service<T>::Service(const char *name)
 
 template <typename T>
 System<T>::System(const char *name)
-	: Detail::Object<T>(name)
+	: detail::Object<T>(name)
 {
-	static_assert(std::is_base_of_v<Argon::System<T>, T>,
+	static_assert(std::is_base_of_v<argon::System<T>, T>,
 		"System must be derived from system template");
 
-	Debug::statusMsg("System ", name, " registered");
+	debug::statusMsg("System ", name, " registered");
 	this->m_class->template constructor<>()
 		(rttr::policy::ctor::as_raw_ptr)
 		(rttr::metadata(SystemMeta::Type, ClassType::System))
@@ -136,4 +136,4 @@ System<T>::System(const char *name)
 		.method("tick", &T::tick);
 }
 
-} // namespace Argon::Reflection
+} // namespace argon::reflection

@@ -7,11 +7,11 @@
 
 TEST(SlotGenerator, Small)
 {
-	Argon::SlotGenerator slotGenerator;
-	Argon::vector<Argon::SlotGenerator::Slot> slots;
-	Argon::vector<Argon::SlotGenerator::Slot> erasedSlots;
+	argon::SlotGenerator slotGenerator;
+	argon::vector<argon::SlotGenerator::Slot> slots;
+	argon::vector<argon::SlotGenerator::Slot> erasedSlots;
 
-	for (Argon::uint32 i = 0; i < Argon::SlotGenerator::SLOTS_PER_PAGES * 2; ++i)
+	for (argon::uint32 i = 0; i < argon::SlotGenerator::SLOTS_PER_PAGES * 2; ++i)
 	{
 		slots.emplace_back(slotGenerator.acquire());
 	}
@@ -21,7 +21,7 @@ TEST(SlotGenerator, Small)
 		EXPECT_TRUE(slotGenerator.isValid(s));
 	}
 
-	for (Argon::sizet i = 0; i < slots.size(); ++i)
+	for (argon::sizet i = 0; i < slots.size(); ++i)
 	{
 		if (i % 2)
 		{
@@ -48,11 +48,11 @@ TEST(SlotGenerator, Small)
 
 TEST(SlotGenerator, Large)
 {
-	Argon::SlotGenerator slotGenerator;
-	Argon::vector<Argon::SlotGenerator::Slot> slots;
-	Argon::vector<Argon::SlotGenerator::Slot> erasedSlots;
+	argon::SlotGenerator slotGenerator;
+	argon::vector<argon::SlotGenerator::Slot> slots;
+	argon::vector<argon::SlotGenerator::Slot> erasedSlots;
 
-	for (Argon::uint32 i = 0; i < Argon::SlotGenerator::SLOTS_PER_PAGES * 50; ++i)
+	for (argon::uint32 i = 0; i < argon::SlotGenerator::SLOTS_PER_PAGES * 50; ++i)
 	{
 		slots.emplace_back(slotGenerator.acquire());
 	}
@@ -62,7 +62,7 @@ TEST(SlotGenerator, Large)
 		EXPECT_TRUE(slotGenerator.isValid(s));
 	}
 
-	for (Argon::sizet i = 0; i < slots.size(); ++i)
+	for (argon::sizet i = 0; i < slots.size(); ++i)
 	{
 		if (i % 3)
 		{
@@ -89,19 +89,19 @@ TEST(SlotGenerator, Large)
 
 TEST(SparseStorage, SlotCheck)
 {
-	Argon::SlotGenerator slotGenerator;
-	Argon::vector<Argon::SlotGenerator::Slot> slots;
-	Argon::SparseStorage<int> storage;
+	argon::SlotGenerator slotGenerator;
+	argon::vector<argon::SlotGenerator::Slot> slots;
+	argon::SparseStorage<int> storage;
 
-	for (Argon::uint32 i = 0; i < Argon::SlotGenerator::SLOTS_PER_PAGES * 2; ++i)
+	for (argon::uint32 i = 0; i < argon::SlotGenerator::SLOTS_PER_PAGES * 2; ++i)
 	{
-		Argon::SlotGenerator::Slot slot = slotGenerator.acquire();
+		argon::SlotGenerator::Slot slot = slotGenerator.acquire();
 		slots.push_back(slot);
 		storage.assign(slot, i);
 	}
 
 	{
-		Argon::uint32 i = 0;
+		argon::uint32 i = 0;
 		for (const auto& s : slots)
 		{
 			EXPECT_TRUE(storage.has(s));
@@ -110,7 +110,7 @@ TEST(SparseStorage, SlotCheck)
 		}
 	}
 
-	Argon::vector<Argon::SlotGenerator::Slot> erasedSlots;
+	argon::vector<argon::SlotGenerator::Slot> erasedSlots;
 	{
 		int i = 0;
 		for (auto it = slots.begin(); it != slots.end(); ++i)
@@ -136,9 +136,9 @@ TEST(SparseStorage, SlotCheck)
 		EXPECT_FALSE(storage.has(s));
 	}
 
-	for (Argon::uint32 i = 0; i < Argon::SlotGenerator::SLOTS_PER_PAGES * 2; ++i)
+	for (argon::uint32 i = 0; i < argon::SlotGenerator::SLOTS_PER_PAGES * 2; ++i)
 	{
-		Argon::SlotGenerator::Slot slot = slotGenerator.acquire();
+		argon::SlotGenerator::Slot slot = slotGenerator.acquire();
 		slots.push_back(slot);
 		storage.assign(slot, i);
 	}
@@ -156,27 +156,27 @@ TEST(SparseStorage, SlotCheck)
 
 TEST(SparseStorage, StorageAccess)
 {
-	Argon::SlotGenerator slotGenerator;
-	Argon::vector<Argon::SlotGenerator::Slot> slots;
-	Argon::vector<Argon::uint32> data;
-	Argon::SparseStorage<int> storage;
+	argon::SlotGenerator slotGenerator;
+	argon::vector<argon::SlotGenerator::Slot> slots;
+	argon::vector<argon::uint32> data;
+	argon::SparseStorage<int> storage;
 
-	for (Argon::uint32 i = 0; i < Argon::SlotGenerator::SLOTS_PER_PAGES * 10; ++i)
+	for (argon::uint32 i = 0; i < argon::SlotGenerator::SLOTS_PER_PAGES * 10; ++i)
 	{
-		Argon::SlotGenerator::Slot slot = slotGenerator.acquire();
+		argon::SlotGenerator::Slot slot = slotGenerator.acquire();
 		slots.push_back(slot);
 		storage.assign(slot, i);
 		data.push_back(i);
 	}
 
-	for (Argon::sizet i = 0; i < slots.size(); ++i)
+	for (argon::sizet i = 0; i < slots.size(); ++i)
 	{
 		EXPECT_TRUE(storage.has(slots[i]));
 		EXPECT_EQ(storage.at(slots[i]), data[i]);
 	}
 
 	{
-		Argon::sizet i = 0;
+		argon::sizet i = 0;
 		for (auto& v : storage)
 		{
 			EXPECT_EQ(v, i);
@@ -218,7 +218,7 @@ TEST(SparseStorage, StorageAccess)
 		}
 	}
 
-	for (Argon::sizet i = 0; i < slots.size(); ++i)
+	for (argon::sizet i = 0; i < slots.size(); ++i)
 	{
 		EXPECT_TRUE(storage.has(slots[i]));
 		EXPECT_EQ(storage.at(slots[i]), data[i]);
@@ -226,12 +226,12 @@ TEST(SparseStorage, StorageAccess)
 
 	EXPECT_EQ(storage.size(), data.size());
 
-	for (Argon::uint32 i = 0; i < Argon::SlotGenerator::SLOTS_PER_PAGES * 10; ++i)
+	for (argon::uint32 i = 0; i < argon::SlotGenerator::SLOTS_PER_PAGES * 10; ++i)
 	{
-		Argon::SlotGenerator::Slot slot = slotGenerator.acquire();
+		argon::SlotGenerator::Slot slot = slotGenerator.acquire();
 		slots.push_back(slot);
 		storage.assign(slot, i);
-		data.push_back(i + Argon::SlotGenerator::SLOTS_PER_PAGES * 10);
+		data.push_back(i + argon::SlotGenerator::SLOTS_PER_PAGES * 10);
 	}
 
 	{

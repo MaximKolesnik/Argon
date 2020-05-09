@@ -8,9 +8,7 @@
 #include <GLFW/glfw3.h>
 #pragma clang diagnostic pop
 
-namespace Argon
-{
-namespace Render
+namespace argon::render
 {
 struct ShaderInfo
 {
@@ -20,5 +18,4 @@ struct ShaderInfo
 };
 
 GLuint LoadShaders(ShaderInfo* info);
-} // namespace Render
-} // namespace Argon
+} // namespace argon::render

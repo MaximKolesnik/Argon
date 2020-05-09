@@ -4,7 +4,7 @@
 
 #include <fundamental/non_copyable.hpp>
 
-namespace Argon
+namespace argon
 {
 class EntityManager;
 class SystemManager;
@@ -22,4 +22,4 @@ private:
 	std::unique_ptr<EntityManager> m_entityManager;
 	std::unique_ptr<SystemManager> m_systemManager;
 };
-} // namespace Argon
+} // namespace argon

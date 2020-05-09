@@ -8,7 +8,7 @@
 
 #include "standard_containers.hpp"
 
-namespace Argon
+namespace argon
 {
 class AR_SYM_EXPORT SlotGenerator final
 {
@@ -239,4 +239,4 @@ void SparseStorage<TData>::_prepareRedirectionMemory(SlotGenerator::Slot slot)
 			std::make_unique<SlotGenerator::Slot[]>(SlotGenerator::SLOTS_PER_PAGES);
 	}
 }
-} // namespace Argon
+} // namespace argon

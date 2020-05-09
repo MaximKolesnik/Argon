@@ -12,7 +12,7 @@ namespace rttr
 class library;
 } // namespace rttr
 
-namespace Argon
+namespace argon
 {
 class PluginManager
 	: NonCopyable
@@ -27,4 +27,4 @@ public:
 private:
 	unordered_map<std::string, std::unique_ptr<rttr::library>> m_plugins;
 };
-} // namespace Argon
+} // namespace argon
