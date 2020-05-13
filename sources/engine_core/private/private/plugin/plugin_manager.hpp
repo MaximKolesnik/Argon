@@ -12,19 +12,22 @@ namespace rttr
 class library;
 } // namespace rttr
 
-namespace argon
+namespace argon::privateimpl
 {
+class ServiceManager;
+
 class PluginManager
 	: NonCopyable
 {
 public:
-	PluginManager();
+	PluginManager(ServiceManager &serviceManager);
 	~PluginManager();
 
 	void initialize();
 	void finalize();
 
 private:
+	ServiceManager &m_serviceManager;
 	unordered_map<std::string, std::unique_ptr<rttr::library>> m_plugins;
 };
-} // namespace argon
+} // namespace argon::privateimpl

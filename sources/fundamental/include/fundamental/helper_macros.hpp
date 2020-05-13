@@ -12,5 +12,5 @@ namespace argon
 #define AR_UNUSED(expr) (void)(expr)
 
 #define AR_PAD(bytes) \
-	AR_ATTR_UNUSED byte _pad[bytes]
+	AR_ATTR_UNUSED argon::byte _pad[bytes]
 } // namespace argon

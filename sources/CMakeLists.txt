@@ -19,7 +19,7 @@ add_compile_options_config(
 	"-Weverything" "-Werror" "-Wno-c++98-compat" "-Wno-c++98-compat-pedantic"
 	"-Wno-float-equal" "-Wno-global-constructors" "-Wno-comma" "-Wno-c++98-compat-pedantic"
 	"-Wno-weak-vtables" "-Wno-exit-time-destructors"
-	"-std=c++17" "-fms-extensions" "-fno-exceptions" "-Wno-undef"
+	"-std=c++17" "-fms-extensions" "-fno-exceptions" "-fno-rtti" "-Wno-undef"
 	"-fvisibility=hidden" "-mavx")
 
 if (NOT CMAKE_SIZEOF_VOID_P EQUAL 8)

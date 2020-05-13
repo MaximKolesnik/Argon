@@ -8,19 +8,24 @@
 
 namespace argon
 {
-class SlotGenerator;
+namespace privateimpl
+{
+struct EntityManagerData;
+class ServiceManager;
+} // namespace privateimpl
 
 class EntityManager final
 	: NonCopyable
 {
 public:
-	EntityManager();
+	EntityManager(privateimpl::ServiceManager &serviceManager);
 	~EntityManager();
 
 	Entity createEntity();
 	bool isValid(const Entity& e) const;
 
 private:
-	std::unique_ptr<SlotGenerator> m_entitySlotGenerator;
+	privateimpl::ServiceManager &m_serviceManager;
+	privateimpl::EntityManagerData& m_impl;
 };
 } // namespace argon

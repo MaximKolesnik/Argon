@@ -10,11 +10,13 @@
 namespace argon
 {
 class AR_SYM_EXPORT Filesystem final
-	: public Service<Filesystem>
+	: public ServiceBase
 {
 public:
-	void initialize();
-	void finalize();
+	Filesystem(ConstructionData &&data);
+	~Filesystem();
+	
+	void tick();
 
 	const std::filesystem::path& getPluginDir() const { return m_plugins; }
 
@@ -24,7 +26,7 @@ public:
 private:
 	friend class Engine;
 
-	void privateConstruct(const std::string &basePath);
+	void _privateConstruct(const std::string &basePath);
 
 	std::filesystem::path m_root;
 	std::filesystem::path m_plugins;

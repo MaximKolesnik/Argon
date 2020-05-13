@@ -24,7 +24,7 @@ struct VertexData
 
 static GLFWwindow *window = nullptr;
 
-void SimpleApp::prepare()
+void SimpleApp::prepare(const char *vShader, const char *fShader)
 {
 	glfwInit();
 	window = glfwCreateWindow(640, 480, "Triangles", nullptr, nullptr);
@@ -50,8 +50,8 @@ void SimpleApp::prepare()
 
 	render::ShaderInfo  shaders[] =
 	{
-		{ GL_VERTEX_SHADER, 0, "shaders/gouraud/gouraud.vert" },
-		{ GL_FRAGMENT_SHADER, 0, "shaders/gouraud/gouraud.frag" },
+		{ GL_VERTEX_SHADER, 0, vShader },
+		{ GL_FRAGMENT_SHADER, 0, fShader },
 		{ GL_NONE, 0, nullptr }
 	};
 
@@ -80,11 +80,6 @@ void SimpleApp::tick()
 	glDrawArrays( GL_TRIANGLES, 0, NumVertices );
 	glfwSwapBuffers(window);
 	glfwPollEvents();
-
-	if (shouldClose())
-	{
-		argon::Engine::instance().shutdown();
-	}
 }
 
 void SimpleApp::close()

@@ -5,16 +5,20 @@
 #include "engine.hpp"
 #include "filesystem.hpp"
 #include "private/plugin/plugin_manager.hpp"
+#include "private/service_manager.hpp"
 
-namespace argon
+namespace argon::privateimpl
 {
-PluginManager::PluginManager() = default;
+PluginManager::PluginManager(ServiceManager &serviceManager)
+	: m_serviceManager(serviceManager)
+{
+}
 
 PluginManager::~PluginManager() = default;
 
 void PluginManager::initialize()
 {
-	const auto &fs = Engine::instance().get<Filesystem>();
+	const auto &fs = m_serviceManager.get<Filesystem>();
 
 	const auto &pluginDir = fs.getPluginDir();
 
@@ -52,4 +56,4 @@ void PluginManager::finalize()
 
 	m_plugins.clear();
 }
-} // namespace argon
+} // namespace argon::privateimpl

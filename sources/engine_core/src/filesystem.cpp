@@ -13,20 +13,14 @@ RTTR_REGISTRATION
 
 namespace argon
 {
-void Filesystem::initialize()
+Filesystem::Filesystem(ConstructionData &&data)
+	: ServiceBase(std::move(data))
 {
-	AR_CRITICAL(!m_basePath.empty(), "Base path is invalid");
-
-	m_root = m_basePath.remove_filename()/".."/".."/"resources/";
-	AR_CRITICAL(std::filesystem::exists(m_root), "Root directory cannot be resolved");
-	m_root = std::filesystem::canonical(m_root);
-
-	m_plugins = m_basePath.remove_filename()/"plugins";
-	AR_CRITICAL(std::filesystem::exists(m_plugins), "Plugin directory cannot be resolved");
-	m_plugins = std::filesystem::canonical(m_plugins);
 }
 
-void Filesystem::finalize()
+Filesystem::~Filesystem() = default;
+
+void Filesystem::tick()
 {
 }
 
@@ -42,8 +36,18 @@ std::filesystem::path Filesystem::resolvePlugin(const std::string &path) const
 	return std::filesystem::exists(abs) ? std::filesystem::canonical(abs) : std::filesystem::path();
 }
 
-void Filesystem::privateConstruct(const std::string &basePath)
+void Filesystem::_privateConstruct(const std::string &basePath)
 {
 	m_basePath = basePath;
+
+	AR_CRITICAL(!m_basePath.empty(), "Base path is invalid");
+
+	m_root = m_basePath.remove_filename()/".."/".."/"resources/";
+	AR_CRITICAL(std::filesystem::exists(m_root), "Root directory cannot be resolved");
+	m_root = std::filesystem::canonical(m_root);
+
+	m_plugins = m_basePath.remove_filename()/"plugins";
+	AR_CRITICAL(std::filesystem::exists(m_plugins), "Plugin directory cannot be resolved");
+	m_plugins = std::filesystem::canonical(m_plugins);
 }
 } // namespace argon

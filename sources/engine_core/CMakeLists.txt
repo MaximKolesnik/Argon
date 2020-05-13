@@ -7,6 +7,7 @@ add_library(${PROJECT_NAME} SHARED)
 target_sources(
 	${PROJECT_NAME}
 	PUBLIC
+	include/engine_core/engine_state.hpp
 	include/engine_core/engine.hpp
 	include/engine_core/entity_manager.hpp
 	include/engine_core/entity.hpp
@@ -20,15 +21,24 @@ target_sources(
 	include/engine_core/time.hpp
 	PRIVATE
 	private/private/plugin/plugin_manager.hpp
+	private/private/construction_data_impl.hpp
+	private/private/entity_manager_data_provider.hpp
+	private/private/service_manager.hpp
+	private/private/system_manager_data_provider.hpp
 
 	src/private/plugin/plugin_manager.cpp
+	src/private/entity_manager_data_provider.cpp
+	src/private/system_manager_data_provider.cpp
 
+	src/engine_state.cpp
 	src/engine.cpp
 	src/entity_manager.cpp
 	src/entity.cpp
 	src/filesystem.cpp
+	src/service.cpp
 	src/space.cpp
 	src/system_manager.cpp
+	src/system.cpp
 	src/time.cpp)
 
 target_include_directories(

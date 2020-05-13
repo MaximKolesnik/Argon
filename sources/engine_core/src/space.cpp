@@ -6,9 +6,10 @@
 
 namespace argon
 {
-Space::Space()
-	: m_entityManager(new EntityManager)
-	, m_systemManager(new SystemManager)
+Space::Space(privateimpl::ServiceManager &serviceManager)
+	: m_serviceManager(serviceManager)
+	, m_entityManager(new EntityManager(serviceManager))
+	, m_systemManager(new SystemManager(serviceManager))
 {
 }
 

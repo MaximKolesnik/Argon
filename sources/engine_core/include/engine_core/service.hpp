@@ -1,26 +1,40 @@
 #pragma once
 
-#include <type_traits>
+#include <memory>
 
+#include <rttr/type.h>
+
+#include <fundamental/helper_macros.hpp>
 #include <fundamental/non_copyable.hpp>
-
-#include "ecs_traits.hpp"
 
 namespace argon
 {
-template <typename TDerived>
-struct Service : NonCopyable
+class AR_SYM_EXPORT ServiceBase
+	: NonCopyable
 {
-	Service()
+	AR_PRIVATE_IMPL(ServiceBase);
+
+public:
+	struct ConstructionData
 	{
-		static_assert(std::is_default_constructible_v<TDerived>,
-			"Service must be default constructible");
-		static_assert(!std::is_polymorphic_v<TDerived>);
-		static_assert(!std::is_copy_constructible_v<TDerived>
-			&& !std::is_assignable_v<TDerived, TDerived>
-			&& !std::is_copy_assignable_v<TDerived>, "Service cannot be copyable");
-		static_assert(ecstraits::HasInitializeMemberV<TDerived>, "Service must have initialize method");
-		static_assert(ecstraits::HasFinalizeMemberV<TDerived>, "Service must have finalize method");
-	}
+		std::unique_ptr<ServiceBasePrivate> m_impl;
+	};
+
+	ServiceBase(ConstructionData &&data);
+	~ServiceBase();
+
+	template <typename T>
+	T& get();
+
+private:
+	friend class Engine; // TODO remove this
+
+	ServiceBase& _get(const rttr::type &type);
 };
+
+template <typename T>
+T& ServiceBase::get()
+{
+	return static_cast<T&>(_get(rttr::type::get<T>()));
+}
 } // namespace argon

@@ -4,9 +4,15 @@
 
 #include <render/simple_app.hpp>
 
-class SimpleAppSystem : public argon::System<SimpleAppSystem>
+#include <fundamental/helper_macros.hpp>
+#include <fundamental/types.hpp>
+
+class SimpleAppSystem : public argon::SystemBase
 {
 public:
+	SimpleAppSystem(argon::SystemBase::ConstructionData &&data)
+		: argon::SystemBase(std::move(data)) {}
+
 	void initialize();
 	void finalize();
 
@@ -14,4 +20,5 @@ public:
 
 private:
 	argon::SimpleApp app;
+	AR_PAD(7);
 };

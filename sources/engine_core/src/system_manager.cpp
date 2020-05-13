@@ -1,36 +1,46 @@
 #include <fundamental/debug.hpp>
 
+#include "private/system_manager_data_provider.hpp"
+#include "private/construction_data_impl.hpp"
 #include "system_manager.hpp"
 #include "system.hpp"
 
 namespace argon
 {
-SystemManager::SystemManager()
+SystemManager::SystemManager(privateimpl::ServiceManager &serviceManager)
+	: m_serviceManager(serviceManager)
+	, m_data(serviceManager.get<privateimpl::SystemManagerDataProvider>().acquire(*this))
 {
 	const auto sysType = rttr::type::get_by_name("SimpleAppSystem");
 	AR_CRITICAL(sysType.is_valid(), "Filesystem is not registered");
 
-	m_systems.emplace(sysType, sysType.create());
-	sysType.get_method("initialize").invoke(m_systems[sysType]);
+	const auto ctr = sysType.get_constructor({rttr::type::get<SystemBase::ConstructionData&&>()});
+	auto var = ctr.invoke(SystemBase::ConstructionData{
+		std::make_unique<SystemBase::SystemBasePrivate>(m_serviceManager)});
+
+	privateimpl::SystemData data(sysType, std::move(var));
+	AR_CRITICAL(data.isValid(), "SystemData is not valid");
+
+	data.init();
+	m_data.m_systems.emplace(sysType, std::move(data));
 }
 
 SystemManager::~SystemManager()
 {
-	for (auto &s : m_systems)
+	for (auto &s : m_data.m_systems)
 	{
-		s.first.get_method("finalize").invoke(s.second);
-		s.first.get_destructor().invoke(s.second);
-		AR_CRITICAL(!s.second.is_valid(), "System was not destroyed");
+		s.second.fini();
 	}
 
-	m_systems.clear();
+	m_data.m_systems.clear();
+	m_serviceManager.get<privateimpl::SystemManagerDataProvider>().release(*this);
 }
 
 void SystemManager::tick()
 {
-	for (const auto& s : m_systems)
+	for (auto& s : m_data.m_systems)
 	{
-		s.first.get_method("tick").invoke(s.second);
+		s.second.tick();
 	}
 }
 } // namespace argon

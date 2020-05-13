@@ -1,77 +1,67 @@
-#include <iostream>
-#include <filesystem>
-
 #include <fundamental/debug.hpp>
 
+#include "private/construction_data_impl.hpp"
 #include "private/plugin/plugin_manager.hpp"
+#include "private/service_manager.hpp"
 #include "engine.hpp"
+#include "engine_state.hpp"
 #include "filesystem.hpp"
 #include "reflection.hpp"
+#include "service.hpp"
 #include "space.hpp"
 #include "time.hpp"
 
 namespace argon
 {
-namespace
-{
-static Engine* s_engine = nullptr;
-} // unnamed namespace
-
 Engine::Engine(const std::string &workDir)
 	: m_workingDir(workDir)
-	, m_shutdown(false)
+	, m_serviceManager(new privateimpl::ServiceManager)
+	, m_pluginManager(new privateimpl::PluginManager(*m_serviceManager))
 {
-	s_engine = this;
-
-	{
-		const auto& fsType = rttr::type::get<Filesystem>();
-		AR_CRITICAL(fsType.is_valid(), "Filesystem is not registered");
-
-		m_services.emplace(fsType, fsType.create());
-
-		auto& fs = m_services.at(fsType);
-		fs.get_value<Filesystem*>()->privateConstruct(workDir);
-
-		AR_CRITICAL(fsType.get_method("initialize").is_valid(), "Filesystem is not registered");
-		fsType.get_method("initialize").invoke(fs);
-	}
-
-	m_pluginManager = std::make_unique<PluginManager>();
+	_initCoreServices();
 	m_pluginManager->initialize();
-
-	m_space = std::make_unique<Space>();
+	m_space = std::make_unique<Space>(*m_serviceManager);
 }
 
 Engine::~Engine()
 {
 	m_space.reset();
-	
-	for (auto &sp : m_services)
-	{
-		sp.first.get_method("finalize").invoke(sp.second);
-		sp.first.get_destructor().invoke(sp.second);
-		AR_CRITICAL(!sp.second.is_valid(), "Service was not destroyed");
-	}
-
 	m_pluginManager->finalize();
-
-	s_engine = nullptr;
-};
-
-Engine& Engine::instance()
-{
-	AR_CRITICAL(s_engine, "Engine is not initialized");
-
-	return *s_engine;
+	m_serviceManager.reset();
 }
 
 void Engine::exec()
 {
 	Time timer;
 
-	while (!m_shutdown)
+	while (!m_serviceManager->get<EngineState>().isShutingdown())
 	{
 		m_space->tick();
 	}
+}
+
+void Engine::_initCoreServices()
+{
+	for (const auto &type : rttr::type::get_types())
+	{
+		const rttr::variant classTypeMeta = type.get_metadata(reflection::ServiceMeta::Type);
+		if (!classTypeMeta.is_valid())
+		{
+			continue;
+		}
+
+		const auto classType = classTypeMeta.get_value<reflection::ClassType>();
+		if (classType == reflection::ClassType::Service)
+		{
+			const auto ctr = type.get_constructor({rttr::type::get<ServiceBase::ConstructionData&&>()});
+			auto var = ctr.invoke(ServiceBase::ConstructionData{
+				std::make_unique<ServiceBase::ServiceBasePrivate>(*m_serviceManager)});
+
+			privateimpl::ServiceData data(type, std::move(var));
+			m_serviceManager->m_services.emplace(type, std::move(data));
+		}
+	}
+
+	m_serviceManager->get<Filesystem>()._privateConstruct(m_workingDir);
 }
 } // namespace argon

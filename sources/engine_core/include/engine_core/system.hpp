@@ -1,28 +1,42 @@
 #pragma once
 
-#include <typeindex>
+#include <memory>
 
+#include <rttr/type.h>
+
+#include <fundamental/helper_macros.hpp>
 #include <fundamental/non_copyable.hpp>
-#include <fundamental/types.hpp>
-
-#include "ecs_traits.hpp"
-
-// TODO consider removing initialize and finalize from the System
 
 namespace argon
 {
-template <typename TDerived>
-struct System : NonCopyable
+class ServiceBase;
+
+class AR_SYM_EXPORT SystemBase
+	: NonCopyable
 {
-	System()
+	AR_PRIVATE_IMPL(SystemBase);
+
+public:
+	struct ConstructionData
 	{
-		static_assert(!std::is_polymorphic_v<TDerived>);
-		static_assert(!std::is_copy_constructible_v<TDerived>
-			&& !std::is_assignable_v<TDerived, TDerived>
-			&& !std::is_copy_assignable_v<TDerived>, "System cannot be copyable");
-		static_assert(ecstraits::HasTickMemberV<TDerived>, "System must have tick method");
-		static_assert(ecstraits::HasInitializeMemberV<TDerived>, "Service must have initialize method");
-		static_assert(ecstraits::HasFinalizeMemberV<TDerived>, "Service must have finalize method");
-	}
+		std::unique_ptr<SystemBasePrivate> m_impl;
+	};
+
+	SystemBase(ConstructionData &&data);
+	~SystemBase();
+
+	template <typename T>
+	T& get();
+
+private:
+	friend class SystemManager; // TODO REMOVE THIS
+
+	ServiceBase& _get(const rttr::type &type);
 };
+
+template <typename T>
+T& SystemBase::get()
+{
+	return static_cast<T&>(_get(rttr::type::get<T>()));
+}
 } // namespace argon
