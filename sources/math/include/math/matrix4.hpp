@@ -3,14 +3,13 @@
 #include <fundamental/compiler_macros.hpp>
 #include <fundamental/types.hpp>
 
+#include "forward_declarations.hpp"
 #include "simd.hpp"
 #include "vector3.hpp"
 #include "vector4.hpp"
 
 namespace argon::math
 {
-class Quaternion;
-
 AR_ATTR_ALIGN(16) class __attribute__ ((visibility ("default"))) Matrix4 final
 {
 public:

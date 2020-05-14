@@ -3,12 +3,11 @@
 #include <fundamental/compiler_macros.hpp>
 #include <fundamental/types.hpp>
 
+#include "forward_declarations.hpp"
 #include "simd.hpp"
 
 namespace argon::math
 {
-class Vector3;
-
 namespace utils
 {
 #ifdef AR_SIMD

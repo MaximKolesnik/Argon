@@ -8,6 +8,7 @@ target_sources(
 	${PROJECT_NAME}
 	INTERFACE
 	include/math/constants.hpp
+	include/math/forward_declarations.hpp
 	include/math/matrix3.hpp
 	include/math/matrix4.hpp
 	include/math/quaternion.hpp

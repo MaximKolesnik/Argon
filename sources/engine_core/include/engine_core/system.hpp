@@ -7,10 +7,10 @@
 #include <fundamental/helper_macros.hpp>
 #include <fundamental/non_copyable.hpp>
 
+#include "forward_declarations.hpp"
+
 namespace argon
 {
-class ServiceBase;
-
 class AR_SYM_EXPORT SystemBase
 	: NonCopyable
 {

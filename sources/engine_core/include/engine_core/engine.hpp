@@ -11,18 +11,11 @@
 #include <fundamental/non_copyable.hpp>
 #include <fundamental/types.hpp>
 
+#include "forward_declarations.hpp"
 #include "service.hpp"
 
 namespace argon
 {
-namespace privateimpl
-{
-class PluginManager;
-class ServiceManager;
-} // namespace privateimpl
-
-class Space;
-
 class AR_SYM_EXPORT Engine final
 	: NonCopyable
 {

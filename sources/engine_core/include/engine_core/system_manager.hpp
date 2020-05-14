@@ -2,14 +2,10 @@
 
 #include <fundamental/non_copyable.hpp>
 
+#include "forward_declarations.hpp"
+
 namespace argon
 {
-namespace privateimpl
-{
-struct SystemManagerData;
-class ServiceManager;
-} // namespace privateimpl
-
 class SystemManager
 	: NonCopyable
 {

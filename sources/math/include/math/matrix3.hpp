@@ -3,13 +3,12 @@
 #include <fundamental/compiler_macros.hpp>
 #include <fundamental/types.hpp>
 
+#include "forward_declarations.hpp"
 #include "simd.hpp"
 #include "vector3.hpp"
 
 namespace argon::math
 {
-class Quaternion;
-
 AR_ATTR_ALIGN(16) class Matrix3 final
 {
 public:

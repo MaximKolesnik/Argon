@@ -5,15 +5,10 @@
 #include <fundamental/non_copyable.hpp>
 
 #include "entity.hpp"
+#include <forward_declarations.hpp>
 
 namespace argon
 {
-namespace privateimpl
-{
-struct EntityManagerData;
-class ServiceManager;
-} // namespace privateimpl
-
 class EntityManager final
 	: NonCopyable
 {

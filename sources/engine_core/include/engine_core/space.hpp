@@ -4,16 +4,10 @@
 
 #include <fundamental/non_copyable.hpp>
 
+#include "forward_declarations.hpp"
+
 namespace argon
 {
-namespace privateimpl
-{
-class ServiceManager;
-} // namespace privateimpl
-
-class EntityManager;
-class SystemManager;
-
 class Space final
 	: NonCopyable
 {

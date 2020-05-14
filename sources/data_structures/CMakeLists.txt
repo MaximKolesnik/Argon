@@ -7,6 +7,7 @@ add_library(${PROJECT_NAME} SHARED)
 target_sources(
 	${PROJECT_NAME}
 	PUBLIC
+	include/data_structures/forward_declarations.hpp
 	include/data_structures/slot_map.hpp
 	include/data_structures/sparse_storage.hpp
 	PRIVATE

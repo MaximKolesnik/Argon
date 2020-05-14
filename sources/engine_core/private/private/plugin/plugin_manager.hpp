@@ -7,6 +7,8 @@
 
 #include <fundamental/non_copyable.hpp>
 
+#include "forward_declarations.hpp"
+
 namespace rttr
 {
 class library;
@@ -14,8 +16,6 @@ class library;
 
 namespace argon::privateimpl
 {
-class ServiceManager;
-
 class PluginManager
 	: NonCopyable
 {

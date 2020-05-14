@@ -7,12 +7,8 @@
 
 #include <fundamental/debug.hpp>
 
+#include "forward_declarations.hpp"
 #include "service.hpp"
-
-namespace argon
-{
-class EntityManager;
-} // namespace argon
 
 namespace argon::privateimpl
 {
