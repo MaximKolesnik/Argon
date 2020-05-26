@@ -3,16 +3,7 @@ sudo: required
 dist: bionic
 
 install:
-  - cmake --version
-  - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
-  - sudo apt-get update
-  - sudo apt-get remove -y cmake
-  - sudo apt-get install -y ninja-build
-  - sudo apt-get install -y g++-9
-  - sudo apt-get install -y libgl1-mesa-dev
-  - sudo apt-get install -y libglfw3
-  - sudo apt-get install -y libglfw3-dev
-  - sudo apt-get install xorg-dev libglu1-mesa-dev
+  - ./build/linux_dependencies
   - version=3.16
   - build=2
   - wget https://cmake.org/files/v$version/cmake-$version.$build-Linux-x86_64.tar.gz
