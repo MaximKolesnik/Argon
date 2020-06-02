@@ -1,28 +1,12 @@
-cmake_minimum_required (VERSION 3.16.2)
+cmake_minimum_required(VERSION 3.16.2)
 
-include(ExternalProject)
-ExternalProject_Add(
-	rttr
-	PREFIX ${CMAKE_CURRENT_SOURCE_DIR}/rttr096
-	URL ${CMAKE_CURRENT_SOURCE_DIR}/rttr-master.zip
-	UPDATE_COMMAND ""
-	CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR> -DCMAKE_INSTALL_LIBDIR=${CMAKE_LIBRARY_OUTPUT_DIRECTORY} -DBUILD_EXAMPLES=OFF -DBUILD_DOCUMENTATION=OFF -DBUILD_UNIT_TESTS=OFF -DBUILD_PACKAGE=OFF -DBUILD_STATIC=OFF
-	BUILD_COMMAND ninja)
+set(BUILD_EXAMPLES OFF CACHE BOOL "Disable examples for rttr" FORCE)
+set(BUILD_DOCUMENTATION OFF CACHE BOOL "Disable documentation for rttr" FORCE)
+set(BUILD_UNIT_TESTS OFF CACHE BOOL "Disable unit tests for rttr" FORCE)
+set(BUILD_PACKAGE OFF CACHE BOOL "Disable package for rttr" FORCE)
+set(BUILD_STATIC OFF CACHE BOOL "Disable static build for rttr" FORCE)
 
-ExternalProject_Get_Property(rttr install_dir)
-file(MAKE_DIRECTORY "${install_dir}/include")
+add_subdirectory(rttr_repo)
 
-if(NOT EXISTS "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/librttr_core.so")
-		file(WRITE "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/librttr_core.so" "dummy file to be replaced by build")
-endif()
-
-add_library(RTTR::Core_Lib SHARED IMPORTED GLOBAL)
-add_dependencies(RTTR::Core_Lib rttr)
-
-set_target_properties(
-		RTTR::Core_Lib
-		PROPERTIES
-		IMPORTED_LOCATION "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/librttr_core.so"
-		INTERFACE_INCLUDE_DIRECTORIES "${install_dir}/include")
-
-add_library(thirdparty::rttr ALIAS RTTR::Core_Lib)
+add_library(thirdparty::rttr ALIAS rttr_core)
+target_compile_options(rttr_core PRIVATE -w -fexceptions)
